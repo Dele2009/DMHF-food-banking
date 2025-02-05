@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Transform, Transition & Animation </title>
+     <style>
+          .box {
+               width: 300px;
+               height: 300px;
+          }
+          .move {
+               /* transform: rotate(0deg) translateX(0px); */
+               border: 2px solid black;
+               /* transition-property: transform;
+               transition-duration: 3s;
+               transition-timing-function: ease;
+               transition-delay: 0s; */
+
+               transition: all 1s ease 0s;
+          }
+          .move:hover {
+               /* transform: rotate(180deg) translateX(-200px); */
+               border-width: 10px;
+          }
+     </style>
+</head>
+<body>
+     <img src="./public/vite.svg" alt="nature" class="box move">
+</body>
+</html>
