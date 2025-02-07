@@ -68,11 +68,9 @@ export default function AuthProvider({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const user = JSON.parse(Cookies.get("user") || "{}");
+    const user = JSON.parse(Cookies.get("user") || "null");
     if (user) {
       dispatch({type: "SIGN_IN", payload: user})
-    } else {
-      window.location.href = "/auth/sign-in"
     }
   }, []);
 

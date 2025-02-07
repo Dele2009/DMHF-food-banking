@@ -11,8 +11,8 @@ export const axios = axiosInstance.create({
 // Add a request interceptor
 axios.interceptors.request.use(
   (config) => {
-    const token = JSON.parse(Cookies.get("token") || "{}");
-    const user: UserType = JSON.parse(Cookies.get("user") || "{}");
+    const token = JSON.parse(Cookies.get("token") || "null");
+    const user: UserType = JSON.parse(Cookies.get("user") || "null");
     if (token && user) {
       if (isTokenExpired(token.access)) {
         window.location.href = "/auth/sign-in";
