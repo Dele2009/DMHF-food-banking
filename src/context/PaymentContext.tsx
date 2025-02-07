@@ -7,12 +7,13 @@ import {
   ModalFooter,
   useDisclosure,
   Input,
-  Button,
-  CheckboxGroup,
+  // Button,
+  // CheckboxGroup,
   Checkbox,
 } from "@heroui/react";
 import { Currency } from "react-paystack/dist/types";
 import { usePaystackPayment } from "../hooks/usePayStack";
+import Button from "../components/ui/Button";
 
 interface PaymentModalProps {
   proceed?: (details: PaymentDetailsType) => void;
@@ -45,27 +46,27 @@ export const PaymentProvider = ({
   const { isOpen, onOpen: openPaymentModal, onOpenChange } = useDisclosure();
 
   const PaymentModal = ({ proceed }: PaymentModalProps) => {
-    const [localPaymentDetails, setLocalPaymentDetails] =
-      useState<PaymentDetailsType>({
-        firstname: "",
-        lastname: "",
-        email: "",
-        currency: "NGN",
-        amount: "",
-      });
+    const [paymentDetails, setPaymentDetails] = useState<PaymentDetailsType>({
+      firstname: "",
+      lastname: "",
+      email: "",
+      currency: "NGN",
+      amount: "",
+    });
     const handleLocalChange = (
       e: React.ChangeEvent<HTMLInputElement> | any
     ) => {
       const { name, value } = e.target;
-      setLocalPaymentDetails((prev) => ({
+      console.log(name, value);
+      setPaymentDetails((prev) => ({
         ...prev,
         [name]: value,
       }));
     };
 
     const initializePayment = usePaystackPayment({
-      ...localPaymentDetails,
-      amount: Number(localPaymentDetails.amount),
+      ...paymentDetails,
+      amount: Number(paymentDetails.amount),
     });
     const onSuccess = (res: any) => {
       console.log(res);
@@ -80,7 +81,12 @@ export const PaymentProvider = ({
     };
 
     return (
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="md">
+      <Modal
+        isOpen={isOpen}
+        backdrop="blur"
+        onOpenChange={onOpenChange}
+        size="md"
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -90,45 +96,59 @@ export const PaymentProvider = ({
                   <Input
                     name="firstname"
                     label="First Name"
-                    value={localPaymentDetails.firstname}
+                    value={paymentDetails.firstname}
                     onChange={handleLocalChange}
                   />
                   <Input
                     name="lastname"
                     label="Last Name"
-                    value={localPaymentDetails.lastname}
+                    value={paymentDetails.lastname}
                     onChange={handleLocalChange}
                   />
                   <Input
                     name="email"
+                    isRequired
                     label="Email Address"
-                    value={localPaymentDetails.email}
+                    value={paymentDetails.email}
                     onChange={handleLocalChange}
                   />
-                  <CheckboxGroup
-                    label="Currency"
-                    value={[localPaymentDetails.currency as string]}
-                    onChange={(value) =>
-                      setLocalPaymentDetails((prev) => ({
-                        ...prev,
-                        currency: value[0],
-                      }))
-                    }
-                  >
-                    <Checkbox value="NGN">NGN</Checkbox>
-                    <Checkbox value="USD">USD</Checkbox>
-                  </CheckboxGroup>
+
+                  <label className="mt-5 mb-3 text-gray-850 dark:text-white">
+                    Currency
+                  </label>
+                  <div className="flex gap-5 flex-wrap">
+                    <Checkbox
+                      isSelected={paymentDetails.currency === "NGN"}
+                      name="currency"
+                      onChange={handleLocalChange}
+                      color="warning"
+                      value="NGN"
+                    >
+                      NGN
+                    </Checkbox>
+                    <Checkbox
+                      isSelected={paymentDetails.currency === "USD"}
+                      name="currency"
+                      onChange={handleLocalChange}
+                      color="warning"
+                      value="USD"
+                    >
+                      USD
+                    </Checkbox>
+                  </div>
+
                   <Input
                     name="amount"
+                    isRequired
                     label="Amount"
                     type="number"
-                    value={localPaymentDetails.amount}
+                    value={paymentDetails.amount}
                     onChange={handleLocalChange}
                   />
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>Cancel</Button>
+                <Button useDefaultBg={false} color="default" onPress={onClose}>Cancel</Button>
                 <Button onPress={handlePaymentInitialization} color="primary">
                   Proceed
                 </Button>

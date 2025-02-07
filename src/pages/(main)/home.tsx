@@ -19,12 +19,11 @@ const HomePage = () => {
       <div className="min-h-screen transition-all duration-500">
         <PaymentModal />
         <BgImage
-          className="relative"
           src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
         >
-          {/* <div className="absolute top-0 w-full h-full bg-white/10 backdrop-filter backdrop-blur-xl !z-10"/> */}
+          {/* <div className="absolute top-0 w-full h-full bg-black/20 dark:bg-black/50  !z-10" /> */}
           {/* Hero Section */}
-          <section className="relative py-16 text-center !z-30">
+          <section className="py-16 text-center">
             <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
               <FaHandsHelping className="inline text-yellow-600 mr-2" /> Welcome
               to Divine Mandate Humanitarian Foundation (DMHF)
@@ -85,7 +84,7 @@ const HomePage = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 bg-yellow-700 text-white text-center">
+        {/* <footer className="py-8 bg-yellow-700 text-white text-center">
           <p className="text-lg">
             &copy; 2025 Divine Mandate Humanitarian Foundation. All rights
             reserved.
@@ -99,7 +98,7 @@ const HomePage = () => {
               Terms of Service
             </Button>
           </div>
-        </footer>
+        </footer> */}
       </div>
     </>
   );

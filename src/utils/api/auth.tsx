@@ -4,7 +4,7 @@ import { axios } from "../../config/axios";
 
 export const signIn = async (data: FormData) => {
   try {
-    const response = await axios.post("/users", data);
+    const response = await axios.post("/auth/jwt/create/", data);
     console.log(response);
     return response;
   } catch (err: AxiosError | any) {

@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         classNames={
           classNames || {
-            inputWrapper: "group-data-[focus=true]:border-foreground",
+            inputWrapper: "border-yellow-500 group-data-[focus=true]:border-yellow-500",
             input: "dark:!bg-white dark:autofill:bg-white !text-white",
           }
         }

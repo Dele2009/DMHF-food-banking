@@ -1,14 +1,15 @@
 //
 import { AxiosError } from "axios";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 import { axios } from "../config/axios";
+import Cookies from "js-cookie";
 
 export type UserType = {
-     first_name: string;
-     last_name: string;
-     email: string;
-}
+  first_name: string;
+  last_name: string;
+  email: string;
+};
 
 export type AuthContextType = {
   isAuthenticated: boolean;
@@ -33,7 +34,7 @@ const initialState = {
 };
 
 function reducer(state: any, action: any) {
-        console.log(action)
+  console.log(action);
 
   switch (action.type) {
     case "SET_AUTH_EMAIL":
@@ -65,6 +66,15 @@ export default function AuthProvider({
   children: React.ReactNode;
 }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const user = JSON.parse(Cookies.get("user") || "{}");
+    if (user) {
+      dispatch({type: "SIGN_IN", payload: user})
+    } else {
+      window.location.href = "/auth/sign-in"
+    }
+  }, []);
 
   const signOut = async () => {
     try {

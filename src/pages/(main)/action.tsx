@@ -10,45 +10,47 @@ import {
   FaCreditCard,
   FaUniversity,
 } from "react-icons/fa";
+import BgImage from "../../components/ui/BgImage";
 
 const ActionsPage = () => {
   return (
     <div className=" text-gray-800">
       {/* Header Section */}
-      <section className="py-16 text-center">
-        <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
-          Take Action
-        </h1>
-        <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
-          Empower communities by supporting our initiatives
-        </p>
-      </section>
-
-      {/* Sponsorship Options */}
-      <section id="sponsorship" className="py-1 mb-14 text-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <Card>
-            <div className="flex flex-col justify-center items-center space-x-4 mb-6">
-              <FaHandHoldingHeart className="text-yellow-600 text-3xl" />
-              <h2 className="text-3xl font-semibold">
-                Sponsor a Food Bank Project
-              </h2>
-            </div>
-            <p className="text-lg mb-4">
-              By sponsoring a project, you can provide a food bank for a
-              community, school, or health clinic. 100% of your donation will
-              directly fund food bank initiatives.
-            </p>
-            <div className="flex justify-center space-x-4">
-              <Button>Sponsor Now</Button>
-            </div>
-          </Card>
-        </div>
-      </section>
+      <BgImage src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg">
+        <section className="py-16 text-center">
+          <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
+            Take Action
+          </h1>
+          <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+            Empower communities by supporting our initiatives
+          </p>
+        </section>
+        {/* Sponsorship Options */}
+        <section id="sponsorship" className="py-1 pb-14 text-gray-900">
+          <div className="max-w-4xl mx-auto">
+            <Card>
+              <div className="flex flex-col justify-center items-center space-x-4 mb-6">
+                <FaHandHoldingHeart className="text-yellow-600 text-3xl" />
+                <h2 className="text-3xl font-semibold">
+                  Sponsor a Food Bank Project
+                </h2>
+              </div>
+              <p className="text-lg mb-4">
+                By sponsoring a project, you can provide a food bank for a
+                community, school, or health clinic. 100% of your donation will
+                directly fund food bank initiatives.
+              </p>
+              <div className="flex justify-center space-x-4">
+                <Button>Sponsor Now</Button>
+              </div>
+            </Card>
+          </div>
+        </section>
+      </BgImage>
 
       {/* Contribution Methods */}
       <section id="contributions" className="py-16 bg-background">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="w-full max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-semibold mb-6 text-foreground">
             Ways to Contribute
           </h2>
@@ -85,7 +87,11 @@ const ActionsPage = () => {
       </section>
 
       {/* Brand Partnerships */}
-      <section id="partnerships" className="py-16">
+      <BgImage
+        id="partnerships"
+        className="py-16"
+        src="https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-9924.jpg"
+      >
         <div className="max-w-4xl mx-auto">
           <Card>
             <div className="flex flex-col justify-center items-center space-x-4 mb-6">
@@ -103,7 +109,7 @@ const ActionsPage = () => {
             </div>
           </Card>
         </div>
-      </section>
+      </BgImage>
 
       {/* FAQs */}
       <section id="faqs" className="py-16 bg-background text-foreground">
@@ -158,14 +164,6 @@ const ActionsPage = () => {
           </Accordion>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 bg-yellow-700 text-white text-center">
-        <p>
-          &copy; 2025 Divine Mandate Humanitarian Foundation. All rights
-          reserved.
-        </p>
-      </footer>
     </div>
   );
 };

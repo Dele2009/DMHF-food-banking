@@ -19,14 +19,15 @@ export default function BgImage({
   return (
     <div
       {...props}
-      className={className}
+      className={`relative ${className}`}
       style={{
         backgroundImage: `url(${src})`,
         backgroundSize: size,
         backgroundRepeat: repeat ? "repeat" : "no-repeat",
       }}
     >
-      {children}
+      <div className="absolute top-0 w-full h-full bg-black/20 dark:bg-black/50  !z-10" />
+      <div className="relative !z-30">{children}</div>
     </div>
   );
 }

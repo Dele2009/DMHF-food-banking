@@ -4,7 +4,9 @@ import {
   CardProps as MyCardProps,
 } from "@heroui/react";
 
-interface CardProps extends MyCardProps { }
+interface CardProps extends MyCardProps {
+  bgBlurVal?: { light?: string; dark?: string };
+}
 
 /**
  * A card component that can be used to display content in a card format.
@@ -24,6 +26,7 @@ export default function Card({
   className = "",
   isBlurred = false,
   shadow = "lg",
+  bgBlurVal = { light: "10", dark: "10" },
   ...props
 }: CardProps) {
   return (
@@ -31,7 +34,7 @@ export default function Card({
       shadow={shadow}
       isBlurred={isBlurred}
       {...props}
-      className={`bg-white/10 border border-gray-200 backdrop-filter backdrop-blur-lg p-10 ${className}`}
+      className={`bg-white/${bgBlurVal.light} dark:!bg-white/${bgBlurVal.dark} border border-gray-200 backdrop-filter backdrop-blur-lg p-10 ${className}`}
     >
       <MainCardBody className="text-center">{children}</MainCardBody>
     </MainCard>

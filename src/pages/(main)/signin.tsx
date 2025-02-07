@@ -8,8 +8,12 @@ import axios, { AxiosError } from "axios";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Carousel from "../../components/ui/Carousel";
+import { useAuth } from "../../hooks/useAuth";
+import { signIn } from "../../utils/api/auth";
+import Cookies from "js-cookie";
 
 const schema = yup.object().shape({
   email: yup
@@ -22,6 +26,8 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 export default function SignInPage() {
+  const { dispatch } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [btnDisabled, setDisabled] = useState(true);
 
@@ -31,6 +37,7 @@ export default function SignInPage() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
     watch,
   } = useForm<FormData>({
@@ -47,92 +54,132 @@ export default function SignInPage() {
     }
   };
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (Formdata: FormData) => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoading(false);
-    console.log(data);
+    const formData = new FormData();
+    Object.entries(Formdata).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    try {
+      const { data } = await signIn(formData);
+      console.log(data);
+      const { access, refresh, ...userDetails } = data;
+      Cookies.set("token", JSON.stringify({ access, refresh }));
+      Cookies.set("user", JSON.stringify({ ...userDetails }));
+      reset();
+      dispatch({ type: "SIGN_IN", payload: { ...userDetails } });
+      toast.success("Logged in sucessfully");
+      // navigate("/auth/verify");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.response?.data?.detail || error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen w-full max-w-lg  mx-auto flex flex-col justify-center items-center py-16">
-      <Link to="/" className="block mb-10">
-        <Logo size={45} />
-      </Link>
-      <h1 className="text-2xl font-extrabold text-center mb-6">
-        Sign In to Your Account
-      </h1>
-      <p className="text-center mb-8 text-gray-600 dark:text-gray-400">
-        Enter your email and password to access your account. If you don't have
-        an account, you can create one by clicking the link below.
-      </p>
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full bg-white/10 dark:backdrop-filter backdrop-blur-lg p-6 shadow-lg rounded-md"
+    <div className="h-screen grid grid-cols-1 lg:grid-cols-2 gap-10 mx-auto w-full place-items-center">
+      <Carousel
+        showArrows={false}
+        autoPlay
+        className="rounded-2xl hidden lg:block"
       >
-        <Input
-          isClearable
-          isRequired
-          onValueChange={checkValues}
-          className="mb-4"
-          {...register("email")}
-          errorMessage={errors.email?.message}
-          isInvalid={!!errors.email}
-          label="Email Address"
-          labelPlacement="inside"
-          type="email"
-          startContent={<FaEnvelope className="text-yellow-500 text-xl" />}
+        <img
+          src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
+          alt="Slide 1"
+          className="w-full h-full object-cover bg-red-400"
         />
-
-        <Input
-          isRequired
-          onValueChange={checkValues}
-          className="mb-4"
-          {...register("password")}
-          errorMessage={errors.password?.message}
-          isInvalid={!!errors.password}
-          label="Password"
-          type={isVisible ? "text" : "password"}
-          labelPlacement="inside"
-          startContent={<FaLock className="text-yellow-500 text-xl" />}
-          endContent={
-            <button
-              aria-label="toggle password visibility"
-              className="focus:outline-none"
-              type="button"
-              onClick={toggleVisibility}
-            >
-              {isVisible ? (
-                <FaEyeSlash className="text-2xl text-foreground pointer-events-none" />
-              ) : (
-                <FaEye className="text-2xl text-foreground pointer-events-none" />
-              )}
-            </button>
-          }
+        <img
+          src="/vite.svg"
+          alt="Slide 2"
+          className="w-full h-full object-cover bg-blue-400"
         />
-        <Button
-          fullWidth
-          // isDisabled={btnDisabled}
-          isLoading={loading}
-          size="lg"
-          type="submit"
-          className="mb-4 text-black"
+        <img
+          src="https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg"
+          alt="Slide 3"
+          className="w-full h-full object-cover bg-yellow-400"
+        />
+      </Carousel>
+      <div className="w-full px-5 lg:px-20 mx-auto flex flex-col justify-center items-center py-16">
+        <Link to="/" className="block mb-10">
+          <Logo size={45} />
+        </Link>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full bg-white/10 dark:backdrop-filter backdrop-blur-lg p-6 shadow-lg rounded-md"
         >
-          SIgn In
-        </Button>
-        <Divider className="!bg-foreground/20" />
-        <div className="flex w-full justify-center items-center">
-          <p className="text-md text-center">
-            Dont have an account with us?{" "}
-            <Link
-              className="text-yellow-400 hover:underline"
-              to="/auth/sign-up"
-            >
-              Create an account
-            </Link>
+          <h1 className="text-2xl font-extrabold text-center mb-6">
+            Sign In to Your Account
+          </h1>
+          <p className="text-center mb-8 text-gray-600 dark:text-gray-400">
+            Enter your email and password to access your account. If you don't
+            have an account, you can create one by clicking the link below.
           </p>
-        </div>
-      </Form>
+          <Input
+            isClearable
+            isRequired
+            onValueChange={checkValues}
+            className="mb-4"
+            {...register("email")}
+            errorMessage={errors.email?.message}
+            isInvalid={!!errors.email}
+            label="Email Address"
+            labelPlacement="inside"
+            type="email"
+            startContent={<FaEnvelope className="text-yellow-500 text-xl" />}
+          />
+
+          <Input
+            isRequired
+            onValueChange={checkValues}
+            className="mb-4"
+            {...register("password")}
+            errorMessage={errors.password?.message}
+            isInvalid={!!errors.password}
+            label="Password"
+            type={isVisible ? "text" : "password"}
+            labelPlacement="inside"
+            startContent={<FaLock className="text-yellow-500 text-xl" />}
+            endContent={
+              <button
+                aria-label="toggle password visibility"
+                className="focus:outline-none"
+                type="button"
+                onClick={toggleVisibility}
+              >
+                {isVisible ? (
+                  <FaEyeSlash className="text-2xl text-foreground pointer-events-none" />
+                ) : (
+                  <FaEye className="text-2xl text-foreground pointer-events-none" />
+                )}
+              </button>
+            }
+          />
+          <Button
+            fullWidth
+            // isDisabled={btnDisabled}
+            isLoading={loading}
+            size="lg"
+            type="submit"
+            className="mb-4 text-black"
+          >
+            SIgn In
+          </Button>
+          <Divider className="!bg-foreground/20" />
+          <div className="flex w-full justify-center items-center">
+            <p className="text-md text-center">
+              Dont have an account with us?{" "}
+              <Link
+                className="text-yellow-400 hover:underline"
+                to="/auth/sign-up"
+              >
+                Create an account
+              </Link>
+            </p>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }

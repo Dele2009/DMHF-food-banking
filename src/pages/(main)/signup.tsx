@@ -43,14 +43,14 @@ const schema = yup.object().shape({
     .min(11, "NIN number must be 11 characters long")
     .required("NIN number is required"),
   password: yup.string().required("Password is required"),
-  confirm_password: yup
+  c_password: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("Confirm password is required"),
 });
 
 type SignInData = yup.InferType<typeof schema> 
-
+ 
 export default function SignUpPage() {
   const { dispatch } = useAuth();
   const navigate = useNavigate();
@@ -165,7 +165,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className=" w-full max-w-2xl mx-auto min-h-screen flex flex-col justify-center items-center py-16">
+    <div className=" w-full max-w-5xl mx-auto min-h-screen flex flex-col justify-center items-center py-16">
       <Link to="/" className="block mb-10">
         <Logo size={45} />
       </Link>
@@ -289,9 +289,9 @@ export default function SignUpPage() {
           />
           <Input
             isRequired
-            {...register("confirm_password")}
-            errorMessage={errors.confirm_password?.message}
-            isInvalid={!!errors.confirm_password}
+            {...register("c_password")}
+            errorMessage={errors.c_password?.message}
+            isInvalid={!!errors.c_password}
             label="Confirm Password"
             type={isConfirmVisible ? "text" : "password"}
             labelPlacement="inside"

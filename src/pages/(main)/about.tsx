@@ -109,7 +109,7 @@ const AboutUsPage = () => {
                 variants={sectionVariants}
                 transition={{ delay: index * 2 }}
               >
-                <Card>
+                <Card bgBlurVal={{light: '90', dark: '10'}}>
                   <h3 className="flex flex-col justify-center items-center text-xl font-semibold mb-4">
                     <area.icon className="inline text-yellow-600 mr-2" />{" "}
                     {area.title}
