@@ -9,9 +9,11 @@ import SignUpPage from "./pages/(main)/signup";
 import SignInPage from "./pages/(main)/signin";
 import VerifyOtpPage from "./pages/(main)/otpverify";
 import VerifyWithLinkPage from "./pages/(main)/verifywithlink";
+import Dashboard from "./pages/(user)/dashboard";
 
 import MainLayout from "./layouts/(main)";
 import AuthLayout from "./layouts/(main)/authlayout";
+import MemberLayout from "./layouts/(user)/MemberLayout";
 
 export const Router = () => {
   return (
@@ -29,6 +31,10 @@ export const Router = () => {
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="verify" element={<VerifyOtpPage />} />
         <Route path="verify/:token" element={<VerifyWithLinkPage />} />
+      </Route>
+
+      <Route path="/member" element={<MemberLayout />}>
+        <Route path="dashboard" element={<Dashboard />} />
       </Route>
     </Routes>
   );

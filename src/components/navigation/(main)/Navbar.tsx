@@ -19,13 +19,13 @@ export const Logo = ({ size = 30 }: { size?: number }) => {
 };
 
 export default function Navbar() {
-  const location = useLocation();
+  const {pathname} = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
 
   useEffect(() => {
-    setCurrentPath(location.pathname);
-  }, [location]);
+    setCurrentPath(pathname);
+  }, [pathname]);
 
   const menuItems = [
     { label: "Home", path: "/" },
@@ -75,9 +75,6 @@ export default function Navbar() {
           <Button as={Link} color="primary" to="/auth/sign-up" variant="flat">
             Sign Up
           </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <ThemeToggler />
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

@@ -9,7 +9,6 @@ const isProduction = process.env.NODE_ENV === "production";
 const Port = process.env.PORT;
 const Base = process.env.BASE || "/";
 
-console.log(isProduction)
 const templateHtml = isProduction
   ? await fs.readFile("./dist/client/index.html", "utf-8")
   : "";
