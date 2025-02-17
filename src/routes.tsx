@@ -10,6 +10,8 @@ import SignInPage from "./pages/(main)/signin";
 import VerifyOtpPage from "./pages/(main)/otpverify";
 import VerifyWithLinkPage from "./pages/(main)/verifywithlink";
 import Dashboard from "./pages/(user)/dashboard";
+import ContactPage from "./pages/(main)/contact";
+
 
 import MainLayout from "./layouts/(main)";
 import AuthLayout from "./layouts/(main)/authlayout";
@@ -23,6 +25,7 @@ export const Router = () => {
         <Route path="about" element={<AboutUsPage />} />
         <Route path="take-action" element={<ActionPage />} />
         <Route path="legacy-gifts" element={<PlanLegacyGiftsPage />} />
+        <Route path="contact-us" element={<ContactPage />} />
         <Route path="loading" element={<Loader />} />
       </Route>
 
