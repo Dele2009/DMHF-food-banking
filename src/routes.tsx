@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+// Main Pages
 import HomePage from "./pages/(main)/home";
 import AboutUsPage from "./pages/(main)/about";
 import ActionPage from "./pages/(main)/action";
@@ -9,13 +10,20 @@ import SignUpPage from "./pages/(main)/signup";
 import SignInPage from "./pages/(main)/signin";
 import VerifyOtpPage from "./pages/(main)/otpverify";
 import VerifyWithLinkPage from "./pages/(main)/verifywithlink";
-import Dashboard from "./pages/(user)/dashboard";
 import ContactPage from "./pages/(main)/contact";
 
+// User Pages
+import Dashboard from "./pages/(user)/dashboard";
+import RequestHelpPage from "./pages/(user)/newRequest";
+import ViewRequestsPage from "./pages/(user)/allRequests";
+import ProfilePage from "./pages/(user)/profile";
 
+// Layouts
 import MainLayout from "./layouts/(main)";
 import AuthLayout from "./layouts/(main)/authlayout";
 import MemberLayout from "./layouts/(user)/MemberLayout";
+
+import ProtectedRoute from "./Protected";
 
 export const Router = () => {
   return (
@@ -36,8 +44,18 @@ export const Router = () => {
         <Route path="verify/:token" element={<VerifyWithLinkPage />} />
       </Route>
 
-      <Route path="/member" element={<MemberLayout />}>
+      <Route
+        path="/member"
+        element={
+          <ProtectedRoute>
+            <MemberLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="requests/new" element={<RequestHelpPage />} />
+        <Route path="requests/all" element={<ViewRequestsPage />} />
+        <Route path="settings/profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

@@ -34,6 +34,19 @@ export const isTokenExpired = (token: string) => {
   return exp! < currentTime;
 };
 
+export function getDateObject(daysOffset = 0) {
+  const date = new Date();
+  date.setDate(date.getDate() + daysOffset); // Add or subtract days
+
+  return {
+    calendar: "gregory",
+    era: "ce",
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+  };
+}
+
 export const formatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "short", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
