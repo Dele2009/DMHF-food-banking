@@ -3,6 +3,7 @@ import { IconType } from "react-icons";
 import { FiChevronDown, FiLogOut } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Card, Link as SideBarLink } from "@heroui/react";
+import { useAuth } from "../../../hooks/useAuth";
 
 export interface LinkType {
   name: string;
@@ -17,6 +18,7 @@ interface SidebarPropType {
 }
 
 function DashboardSidebar({ isOpen, links }: SidebarPropType) {
+  const {openLogoutModal} = useAuth()
   const { pathname } = useLocation();
   const [currentPath, setCurrentPath] = useState("");
   const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
@@ -53,7 +55,7 @@ function DashboardSidebar({ isOpen, links }: SidebarPropType) {
                     className="w-full flex items-center justify-between text-white"
                     onPress={() => toggleDropdown(link.name.toLowerCase())}
                   >
-                    <span className="flex items-center gap-2 text-md">
+                    <span className="flex items-center gap-2 text-[16.5px]">
                       <link.icon size={20} /> {link.name}
                     </span>
                     <FiChevronDown
@@ -100,12 +102,12 @@ function DashboardSidebar({ isOpen, links }: SidebarPropType) {
           })}
         </nav>
         <div className="w-full absolute bottom-0 left-0 border-t border-white/20 p-4">
-          <a
-            href="#"
-            className="flex items-center px-4 py-2 text-white bg-[#ff0000] rounded-md"
+          <button
+            onClick={openLogoutModal}
+            className="w-full flex items-center px-4 py-2 text-white bg-[#ff0000] rounded-md"
           >
             <FiLogOut className="mr-3" size={20} /> Logout
-          </a>
+          </button>
         </div>
       </div>
     </div>

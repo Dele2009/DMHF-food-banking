@@ -43,14 +43,14 @@ export default function MemberLayout() {
       icon: FiBookOpen,
       dropdown: [
         {
-          name: "Approved Requests",
+          name: "New Request",
           icon: BsCheckCircle,
-          path: "",
+          path: "requests/new",
         },
         {
-          name: "Pending Requests",
+          name: "All Requests",
           icon: BsHourglass,
-          path: "",
+          path: "requests/all",
         },
       ],
     },
@@ -66,7 +66,7 @@ export default function MemberLayout() {
         {
           name: "Profile",
           icon: FiUser,
-          path: "profile",
+          path: "settings/profile",
         },
       ],
     },

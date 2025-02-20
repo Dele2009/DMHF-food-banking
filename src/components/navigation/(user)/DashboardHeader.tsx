@@ -1,4 +1,8 @@
 import { FiMenu } from "react-icons/fi";
+import ProfileToggle from "../../ui/ProfileToggle";
+import { BiBell } from "react-icons/bi";
+import { Chip } from "@heroui/react";
+import NotificationDropdown from "../../ui/Notification";
 
 function DashboardHeader({ toggleSidebar, isOpen }: { toggleSidebar: () => void; isOpen: boolean; }) {
   return (
@@ -14,10 +18,17 @@ function DashboardHeader({ toggleSidebar, isOpen }: { toggleSidebar: () => void;
           <h2 className="ml-4 text-xl font-bold">Dashboard</h2>
         </div>
         <div className="flex items-center space-x-4">
-          <span className="">Welcome, John Doe</span>
-          <div className="flex size-10 items-center justify-center rounded-full bg-yellow-400 font-bold text-white">
-            JD
-          </div>
+          {/* <div className="bg-[#1e1e1e] relative rounded-full p-3">
+            <BiBell className="text-yellow-500" size={25} />
+            <div className="absolute top-0 right-1 scale-80">
+              <Chip radius="md" color="danger" size="sm">
+                3
+              </Chip>
+            </div>
+          </div> */}
+          <NotificationDropdown/>
+          <ProfileToggle firstname="John" lastname="Doe" email="test@g.com" />
+          {/* <span className="">Welcome, John Doe</span> */}
         </div>
       </header>
     </>

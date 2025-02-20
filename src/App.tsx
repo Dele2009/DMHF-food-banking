@@ -3,6 +3,7 @@ import { Router } from "./routes";
 import { useTheme } from "./hooks/useTheme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "./hooks/useAuth";
 
 function App() {
   // const { prefersDarkMode, isDarkMode, addDarkClass } = useTheme();
@@ -14,6 +15,7 @@ function App() {
   //     localStorage.setItem("prefersDarkmode", "true");
   //   }
   // }, []);
+  const {LogoutModal} = useAuth()
 
   return (
     <main
@@ -26,6 +28,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
+      <LogoutModal/>
     </main>
   );
 }

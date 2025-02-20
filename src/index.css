@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.datepickerBase > div[data-slot="input-wrapper"] {
+  @apply border-yellow-500 hover:border-default-400;
+}
+
+.dashboard-table-header > tr > th {
+  @apply bg-yellow-400 text-black;
+}
+.dashboard-table-header > tr > th > label > span {
+  @apply after:bg-black after:text-white text-white;
+}
+
+.dashboard-table-body > tr {
+  @apply bg-transparent;
+}
+.dashboard-table-body > tr > td[data-selected="true"] {
+  @apply bg-yellow-500/70 text-black z-50;
+}
+/* .dashboard-table-body > tr > td[data-selected="true"]:first-child {
+  @apply rounded-s-xl;
+}
+.dashboard-table-body > tr > td[data-selected="true"]:last-child {
+  @apply rounded-e-xl;
+} */
