@@ -162,8 +162,8 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="p-6 max-w-5xl  mx-auto">
-      <Card radius="sm" className="p-6 bg-[#1e1e1e] border-t-4 border-yellow-500 shadow-md mt-10">
+    <div className="max-w-5xl  mx-auto">
+      <Card radius="sm" className="p-4 bg-[#1e1e1e] border-t-4 border-yellow-500 shadow-md mt-10">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <h1 className="text-2xl text-yellow-500 font-bold">
             Personal Details
@@ -177,7 +177,7 @@ export default function ProfilePage() {
             onClose={() => clearErrors("avatar")}
           />
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="relative w-full mx-auto col-span-2">
+            <div className="relative w-full mx-auto md:col-span-2">
               <Avatar
                 src={avatar}
                 size="lg"
@@ -201,7 +201,7 @@ export default function ProfilePage() {
                 {...register("avatar")}
               />
             </div>
-            <div className="grid grid-cols-1 gap-4 col-span-3">
+            <div className="grid grid-cols-1 gap-4 md:col-span-3">
               <Input
                 label="First Name"
                 startContent={<FaUser />}
