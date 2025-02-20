@@ -239,7 +239,7 @@ export default function ProfilePage() {
           </Button>
         </form>
       </Card>
-      <Card radius="sm" className="p-6 border-t-4 border-yellow-500 bg-[#1e1e1e] shadow-md mt-10">
+      <Card radius="sm" className="p- border-t-4 border-yellow-500 bg-[#1e1e1e] shadow-md mt-10">
         <form
           onSubmit={handlePasswordSubmit(onPasswordSubmit)}
           className="space-y-4"
