@@ -3,7 +3,7 @@ import Input from "../../components/ui/Input";
 import BgImage from "../../components/ui/BgImage";
 import {
   FaEnvelope,
-  FaMailBulk, FaMapMarkerAlt, 
+  FaMailBulk, FaMapMarkerAlt,
   FaPhoneAlt, FaUser,
 } from "react-icons/fa";
 const ContactForm = () => {
@@ -24,39 +24,45 @@ const ContactForm = () => {
 
 
         {/* ADDRESS */}
-        <div className="flex items-center gap-20 bg-white/10 px-5 mt-14 h-80 rounded-2xl shadow-2xl" >
-          <section>
-            <h1 className="font-extrabold text-2xl ">CONTACT US</h1>
-            <div className="">
-              <h1 className="font-semibold text-2xl  flex gap-1.5 mt-5">
-                <FaMapMarkerAlt className="text-yellow-500 text-1xl " />   Address</h1>
-              <p className="">Corporate Office: 18, M K O Abiola way,<br></br> Ring Road,
-                By Bolumole Junction, Challenge,<br></br> Ibadan, Oyo State, Nigeria</p>
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-10 bg-white/10 px-5 py-5 mt-14
+         rounded-2xl shadow-2xl w-full max-w-4xl mx-auto md:h-80 ">
+
+          {/* Left Section */}
+          <section className="text-center md:text-left">
+            <h1 className="font-extrabold text-2xl">CONTACT US</h1>
+            <div className="mt-5">
+              <h1 className="font-semibold text-xl flex items-center gap-1.5 justify-center md:justify-start">
+                <FaMapMarkerAlt className="text-yellow-500 text-xl" /> Address
+              </h1>
+              <p className="text-sm md:text-base">
+                Corporate Office: 18, M K O Abiola way,<br /> Ring Road, By Bolumole Junction, Challenge,<br />
+                Ibadan, Oyo State, Nigeria
+              </p>
             </div>
-            <div className="mt-4 " >
-              <h2 className=" flex gap-2 text-2xl font-extrabold" >
-                <FaMailBulk className="text-yellow-500 text-2xl" />  E-mail</h2>
-              <div className="" >
-                <p className="">support@dmhf.org</p>
-              </div>
+            <div className="mt-4">
+              <h2 className="flex items-center gap-2 text-xl font-extrabold justify-center md:justify-start">
+                <FaMailBulk className="text-yellow-500 text-xl" /> E-mail
+              </h2>
+              <p className="text-sm md:text-base">support@dmhf.org</p>
             </div>
           </section>
-          <div>
-            <section className="-mt-2">
-              <div className="mb-4 -ml-4 " >
-                <h2 className=" flex  gap-2 text-2xl font-semibold">
-                  <FaPhoneAlt className="text-yellow-500 text-2xl" /> Phone</h2>
+
+          {/* Right Section */}
+          <div className=" md:mt-4 lg:mt-10  md:text-left">
+            <section>
+              <h2 className="flex items-center gap-2 text-xl font-semibold justify-center md:justify-start">
+                <FaPhoneAlt className="text-yellow-500 text-xl" /> Phone
+              </h2>
+              <div className="mt-2 space-y-1">
+                <p className="text-sm md:text-base">+234 123 456 7890</p>
+                <p className="text-sm md:text-base">+234 123 456 7890</p>
+                <p className="text-sm md:text-base">+234 123 456 7890</p>
+                <p className="text-sm md:text-base">+234 123 456 7890</p>
               </div>
-              <section className="items-baseline" >
-                <p>+234 123 456 7890</p>
-                <p>+234 123 456 7890</p>
-                <p>+234 123 456 7890</p>
-                <p>+234 123 456 7890</p>
-              </section>
             </section>
           </div>
-
         </div>
+
 
 
         {/* fORM  */}
