@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState, useCallback, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -8,8 +8,10 @@ import {
   useDisclosure,
   Input,
   // Button,
-  // CheckboxGroup,
+  CheckboxGroup,
   Checkbox,
+  Tabs,
+  Tab,
 } from "@heroui/react";
 import { Currency } from "react-paystack/dist/types";
 import { usePaystackPayment } from "../hooks/usePayStack";
@@ -45,7 +47,8 @@ export const PaymentProvider = ({
   // Only managing modal open/close in the provider
   const { isOpen, onOpen: openPaymentModal, onOpenChange } = useDisclosure();
 
-  const PaymentModal = ({ proceed }: PaymentModalProps) => {
+  const PaymentModal = () => {
+    const [selected, setSelected] = useState<React.Key>("onetime");
     const [paymentDetails, setPaymentDetails] = useState<PaymentDetailsType>({
       firstname: "",
       lastname: "",
@@ -53,11 +56,11 @@ export const PaymentProvider = ({
       currency: "NGN",
       amount: "",
     });
+
     const handleLocalChange = (
       e: React.ChangeEvent<HTMLInputElement> | any
     ) => {
       const { name, value } = e.target;
-      console.log(name, value);
       setPaymentDetails((prev) => ({
         ...prev,
         [name]: value,
@@ -92,63 +95,144 @@ export const PaymentProvider = ({
             <>
               <ModalHeader>Make a Payment</ModalHeader>
               <ModalBody>
-                <div className="space-y-4">
-                  <Input
-                    name="firstname"
-                    label="First Name"
-                    value={paymentDetails.firstname}
-                    onChange={handleLocalChange}
-                  />
-                  <Input
-                    name="lastname"
-                    label="Last Name"
-                    value={paymentDetails.lastname}
-                    onChange={handleLocalChange}
-                  />
-                  <Input
-                    name="email"
-                    isRequired
-                    label="Email Address"
-                    value={paymentDetails.email}
-                    onChange={handleLocalChange}
-                  />
+                <Tabs
+                  fullWidth
+                  aria-label="Tabs form"
+                  selectedKey={selected}
+                  size="md"
+                  onSelectionChange={setSelected}
+                  color="warning"
+                >
+                  <Tab key="onetime" title="One Time">
+                    <div className="space-y-4">
+                      <Input
+                        name="firstname"
+                        label="First Name"
+                        value={paymentDetails.firstname}
+                        onChange={handleLocalChange}
+                      />
+                      <Input
+                        name="lastname"
+                        label="Last Name"
+                        value={paymentDetails.lastname}
+                        onChange={handleLocalChange}
+                      />
+                      <Input
+                        name="email"
+                        isRequired
+                        label="Email Address"
+                        value={paymentDetails.email}
+                        onChange={handleLocalChange}
+                      />
 
-                  <label className="mt-5 mb-3 text-gray-850 dark:text-white">
-                    Currency
-                  </label>
-                  <div className="flex gap-5 flex-wrap">
-                    <Checkbox
-                      isSelected={paymentDetails.currency === "NGN"}
-                      name="currency"
-                      onChange={handleLocalChange}
-                      color="warning"
-                      value="NGN"
-                    >
-                      NGN
-                    </Checkbox>
-                    <Checkbox
-                      isSelected={paymentDetails.currency === "USD"}
-                      name="currency"
-                      onChange={handleLocalChange}
-                      color="warning"
-                      value="USD"
-                    >
-                      USD
-                    </Checkbox>
-                  </div>
+                      {/* <label className="mt-5 mb-3 text-gray-850 dark:text-white">
+                      Currency
+                    </label>
+                    <div className="flex gap-5 flex-wrap">
+                      <Checkbox
+                        isSelected={paymentDetails.currency === "NGN"}
+                        name="currency"
+                        onChange={handleLocalChange}
+                        color="warning"
+                        value="NGN"
+                      >
+                        NGN
+                      </Checkbox>
+                      <Checkbox
+                        isSelected={paymentDetails.currency === "USD"}
+                        name="currency"
+                        onChange={handleLocalChange}
+                        color="warning"
+                        value="USD"
+                      >
+                        USD
+                      </Checkbox>
+                    </div> */}
 
-                  <Input
-                    name="amount"
-                    isRequired
-                    label="Amount"
-                    type="number"
-                    value={paymentDetails.amount}
-                    onChange={handleLocalChange}
-                  />
-                </div>
+                      <Input
+                        name="amount"
+                        isRequired
+                        startContent="₦"
+                        label="Amount"
+                        type="number"
+                        value={paymentDetails.amount}
+                        onChange={handleLocalChange}
+                      />
+                    </div>
+                  </Tab>
+                  <Tab key="recurring" title="Recurring">
+                    <div className="space-y-4">
+                      <Input
+                        name="firstname"
+                        label="First Name"
+                        value={paymentDetails.firstname}
+                        onChange={(e) =>
+                          setPaymentDetails({
+                            ...paymentDetails,
+                            firstname: e.target.value,
+                          })
+                        }
+                      />
+                      <Input
+                        name="lastname"
+                        label="Last Name"
+                        value={paymentDetails.lastname}
+                        onChange={(e) =>
+                          setPaymentDetails({
+                            ...paymentDetails,
+                            lastname: e.target.value,
+                          })
+                        }
+                      />
+                      <Input
+                        name="email"
+                        isRequired
+                        label="Email Address"
+                        value={paymentDetails.email}
+                        onChange={(e) =>
+                          setPaymentDetails({
+                            ...paymentDetails,
+                            email: e.target.value,
+                          })
+                        }
+                      />
+                      <label className="mt-5 mb-3 text-gray-850 dark:text-white">
+                      Currency
+                    </label>
+                    <div className="flex gap-5 flex-wrap">
+                        <Checkbox
+                          value="5000"
+                          name="amount"
+                          onChange={handleLocalChange}
+                          isSelected={paymentDetails.amount === "5000"}
+                        >
+                          ₦5,000 / Monthly
+                        </Checkbox>
+                        <Checkbox
+                          value="10000"
+                          name="amount"
+                          onChange={handleLocalChange}
+                          isSelected={paymentDetails.amount === "10000"}
+                        >
+                          ₦10,000 / Monthly
+                        </Checkbox>
+                        <Checkbox
+                          value="20000"
+                          name="amount"
+                          onChange={handleLocalChange}
+                          isSelected={paymentDetails.amount === "20000"}
+                        >
+                          ₦20,000 / Monthly
+                        </Checkbox>
+                      </div>
+                    </div>
+                  </Tab>
+                </Tabs>
               </ModalBody>
               <ModalFooter>
-                <Button useDefaultBg={false} color="default" onPress={onClose}>Cancel</Button>
+                <Button useDefaultBg={false} color="default" onPress={onClose}>
+                  Cancel
+                </Button>
                 <Button onPress={handlePaymentInitialization} color="primary">
                   Proceed
                 </Button>

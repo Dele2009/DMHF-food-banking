@@ -1,4 +1,19 @@
 //
+import React from "react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@heroui/react";
+import {
+  FaSignOutAlt,
+  FaTimesCircle,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import { AxiosError } from "axios";
 import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
@@ -9,6 +24,8 @@ export type UserType = {
   first_name: string;
   last_name: string;
   email: string;
+  is_admin: boolean;
+  profile_picture: string;
 };
 
 export type AuthContextType = {
@@ -16,6 +33,8 @@ export type AuthContextType = {
   user: UserType | null;
   authEmail: string | null;
   signOut: () => Promise<void>;
+  LogoutModal: React.FC;
+  openLogoutModal: () => void;
   dispatch: React.Dispatch<any>;
 };
 
@@ -24,6 +43,8 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   authEmail: null,
   signOut: async () => {},
+  LogoutModal: () => null,
+  openLogoutModal: () => {},
   dispatch: () => {},
 });
 
@@ -34,8 +55,6 @@ const initialState = {
 };
 
 function reducer(state: any, action: any) {
-  console.log(action);
-
   switch (action.type) {
     case "SET_AUTH_EMAIL":
       return {
@@ -65,12 +84,13 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const user = JSON.parse(Cookies.get("user") || "null");
     if (user) {
-      dispatch({type: "SIGN_IN", payload: user})
+      dispatch({ type: "SIGN_IN", payload: user });
     }
   }, []);
 
@@ -86,8 +106,62 @@ export default function AuthProvider({
     }
   };
 
+  const LogoutModal = () => {
+    return (
+      <Modal
+        backdrop="blur"
+        isDismissable={false}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        size="md"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody className="text-center">
+                <div className="flex justify-center items-center size-24 mx-auto mb-4 rounded-full bg-[#ff0000]/20">
+                  <FaExclamationTriangle className="text-[#ff0000] text-5xl" />
+                </div>
+                <p className="text-gray-400 text-md">
+                  Are you sure you want to log out?
+                </p>
+              </ModalBody>
+              <ModalFooter className="flex justify-center gap-4">
+                <Button
+                  size="lg"
+                  variant="bordered"
+                  startContent={<FaTimesCircle className="" />}
+                  color="default"
+                  onPress={onClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  size="lg"
+                  color="danger"
+                  startContent={<FaSignOutAlt className="" />}
+                  // onPress={onConfirm}
+                >
+                  Logout
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    );
+  };
+
   return (
-    <AuthContext.Provider value={{ ...state, dispatch, signOut }}>
+    <AuthContext.Provider
+      value={{
+        ...state,
+        dispatch,
+        signOut,
+        LogoutModal,
+        openLogoutModal: onOpen,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

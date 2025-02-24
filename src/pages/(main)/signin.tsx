@@ -69,7 +69,7 @@ export default function SignInPage() {
       reset();
       dispatch({ type: "SIGN_IN", payload: { ...userDetails } });
       toast.success("Logged in sucessfully");
-      // navigate("/auth/verify");
+      navigate("/member/dashboard");
     } catch (error: any) {
       console.error(error);
       toast.error(error.response?.data?.detail || error.message);
@@ -79,11 +79,11 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="h-screen grid grid-cols-1 lg:grid-cols-2 gap-10 mx-auto w-full place-items-center">
+    <div className="h-screen grid grid-cols-1 lg:grid-cols-2 gap-5 mx-auto w-full place-items-center">
       <Carousel
         showArrows={false}
         autoPlay
-        className="rounded-2xl hidden lg:block"
+        className="hidden lg:block h-full"
       >
         <img
           src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
@@ -101,18 +101,17 @@ export default function SignInPage() {
           className="w-full h-full object-cover bg-yellow-400"
         />
       </Carousel>
-      <div className="w-full px-5 lg:px-20 mx-auto flex flex-col justify-center items-center py-16">
+      <div className="w-full h-full px-5 mx-auto flex flex-col justify-center items-center py-5">
         <Link to="/" className="block mb-10">
           <Logo size={45} />
         </Link>
         <Form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full bg-white/10 dark:backdrop-filter backdrop-blur-lg p-6 shadow-lg rounded-md"
-        >
-          <h1 className="text-2xl font-extrabold text-center mb-6">
+          className="w-full p-6">
+          <h1 className="w-full text-2xl font-extrabold text-center mb-6">
             Sign In to Your Account
           </h1>
-          <p className="text-center mb-8 text-gray-600 dark:text-gray-400">
+          <p className="tex mb-8 text-gray-600 dark:text-gray-400">
             Enter your email and password to access your account. If you don't
             have an account, you can create one by clicking the link below.
           </p>

@@ -31,7 +31,7 @@ export default function Button({
   return (
     <MyButton
       className={`${
-        useDefaultBg ? "bg-gradient-to-br from-yellow-400 to-yellow-300" : ""
+        useDefaultBg ? "bg-gradient-to-br from-yellow-500 to-yellow-400" : ""
       } text-foreground ${className}`}
       size={size}
       variant={variant}

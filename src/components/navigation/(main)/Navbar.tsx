@@ -13,13 +13,16 @@ import {
 } from "@heroui/react";
 import ThemeToggler from "../../theme/toggler";
 import { Link, useLocation } from "react-router-dom";
+import ProfileToggle from "../../ui/ProfileToggle";
+import { useAuth } from "../../../hooks/useAuth";
 
 export const Logo = ({ size = 30 }: { size?: number }) => {
   return <Image src="/vite.svg" alt="logo" radius="none" height={size} />;
 };
 
 export default function Navbar() {
-  const {pathname} = useLocation();
+  const { isAuthenticated, user } = useAuth();
+  const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
 
@@ -32,7 +35,7 @@ export default function Navbar() {
     { label: "About", path: "/about" },
     { label: "Take-action", path: "/take-action" },
     { label: "Legacy-gifts", path: "/legacy-gifts" },
-    {label:"Contact-us", path:"/contact-us" }
+    { label: "Contact-us", path: "/contact-us" },
   ];
 
   return (
@@ -67,16 +70,33 @@ export default function Navbar() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <NavLink as={Link} to="/auth/sign-in">
-            Sign In
-          </NavLink>
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Button as={Link} color="primary" to="/auth/sign-up" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {!isAuthenticated ? (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              <NavLink as={Link} to="/auth/sign-in">
+                Sign In
+              </NavLink>
+            </NavbarItem>
+            <NavbarItem className="hidden lg:flex">
+              <Button
+                as={Link}
+                color="primary"
+                to="/auth/sign-up"
+                variant="flat"
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <NavbarItem className="hidden lg:flex">
+            <ProfileToggle
+              firstname={user?.first_name as string}
+              lastname={user?.last_name as string}
+              email={user?.email as string}
+            />
+          </NavbarItem>
+        )}
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
@@ -93,8 +113,7 @@ export default function Navbar() {
           </NavbarItem>
         ))}
         <NavbarMenuItem>
-          <div className="flex first-line:justify-center">
-            {/* <NavbarItem className="hidden lg:flex"> */}
+          <div className="flex justify-center">
             <NavLink
               className="w-full flex justify-center"
               color="warning"
@@ -103,8 +122,6 @@ export default function Navbar() {
             >
               Sign In
             </NavLink>
-            {/* </NavbarItem> */}
-            {/* <NavbarItem> */}
             <Button
               className="w-full"
               as={Link}
@@ -114,7 +131,6 @@ export default function Navbar() {
             >
               Sign Up
             </Button>
-            {/* </NavbarItem> */}
           </div>
         </NavbarMenuItem>
       </NavbarMenu>
