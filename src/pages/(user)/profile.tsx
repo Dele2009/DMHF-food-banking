@@ -11,6 +11,8 @@ import {
   FaLock,
   FaCheckCircle,
   FaCamera,
+  FaEyeSlash,
+  FaEye,
 } from "react-icons/fa";
 import Input from "../../components/ui/Input";
 
@@ -105,8 +107,6 @@ export default function ProfilePage() {
     register,
     handleSubmit,
     watch,
-    setValue,
-    setError,
     clearErrors,
     formState: { errors },
   } = useForm({
@@ -121,6 +121,14 @@ export default function ProfilePage() {
   });
 
   const [avatar, setAvatar] = useState("");
+  const [visiblePassword, setVisiblePassword] = useState<string[]>([]);
+
+  const togglePasswords = (type: string) =>
+    setVisiblePassword((prev) =>
+      prev.includes(type)
+        ? prev.filter((item) => item !== type)
+        : [...prev, type]
+    );
 
   const selectedFile = watch("avatar") as FileList;
 
@@ -131,25 +139,22 @@ export default function ProfilePage() {
 
       if (selectedFile && selectedFile.length > 0) {
         const file = selectedFile[0];
-        const dimensions = await getImageDimensions(file);
-        console.log(dimensions);
-        if (
-          dimensions.width !== MAX_WIDTH &&
-          dimensions.height !== MAX_HEIGHT
-        ) {
-          setError("avatar", {
-            type: "fileDimensions",
-            message: "Image must be within 500x500 pixels",
-          });
-          setValue("avatar", []);
-          return;
-        }
-        clearErrors("avatar");
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setAvatar(reader.result as string);
-        };
-        reader.readAsDataURL(file);
+        // const dimensions = await getImageDimensions(file);
+        // console.log(dimensions);
+        // if (
+        //   dimensions.width !== MAX_WIDTH &&
+        //   dimensions.height !== MAX_HEIGHT
+        // ) {
+        //   setError("avatar", {
+        //     type: "fileDimensions",
+        //     message: "Image must be within 500x500 pixels",
+        //   });
+        //   setValue("avatar", []);
+        //   return;
+        // }
+        // clearErrors("avatar");
+        const url = URL.createObjectURL(file);
+        setAvatar(url);
       }
     })();
   }, [selectedFile]);
@@ -163,7 +168,10 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-5xl  mx-auto">
-      <Card radius="sm" className="p-4 bg-[#1e1e1e] border-t-4 border-yellow-500 shadow-md mt-10">
+      <Card
+        radius="sm"
+        className="p-4 bg-[#1e1e1e] border-t-4 border-yellow-500 shadow-md mt-10"
+      >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <h1 className="text-2xl text-yellow-500 font-bold">
             Personal Details
@@ -177,7 +185,7 @@ export default function ProfilePage() {
             onClose={() => clearErrors("avatar")}
           />
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="relative w-full mx-auto md:col-span-2">
+            <div className="relative w-full h-[250px] sm:h-[400px] md:h-auto mx-auto md:col-span-2">
               <Avatar
                 src={avatar}
                 size="lg"
@@ -189,7 +197,7 @@ export default function ProfilePage() {
               />
               <label
                 htmlFor="avatar-upload"
-                className="absolute bottom-2 right-2 bg- p-3 rounded-full cursor-pointer"
+                className="absolute bottom-2 right-2 bg-[#1e1e1e] p-3 rounded-full cursor-pointer"
               >
                 <FaCamera className="text-yellow-500" size={20} />
               </label>
@@ -239,7 +247,10 @@ export default function ProfilePage() {
           </Button>
         </form>
       </Card>
-      <Card radius="sm" className="p- border-t-4 border-yellow-500 bg-[#1e1e1e] shadow-md mt-10">
+      <Card
+        radius="sm"
+        className="p-4 border-t-4 border-yellow-500 bg-[#1e1e1e] shadow-md mt-10"
+      >
         <form
           onSubmit={handlePasswordSubmit(onPasswordSubmit)}
           className="space-y-4"
@@ -250,17 +261,49 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               label="New Password"
-              type="password"
+              type={visiblePassword.includes("password") ? "text" : "password"}
               startContent={<FaLock />}
               {...passwordRegister("password")}
+              isInvalid={!!passwordErrors.password}
               errorMessage={passwordErrors.password?.message}
+              endContent={
+                <button
+                  aria-label="toggle password visibility"
+                  className="focus:outline-none"
+                  type="button"
+                  onClick={() => togglePasswords("password")}
+                >
+                  {visiblePassword.includes("password") ? (
+                    <FaEyeSlash className="text-2xl text-foreground pointer-events-none" />
+                  ) : (
+                    <FaEye className="text-2xl text-foreground pointer-events-none" />
+                  )}
+                </button>
+              }
             />
             <Input
               label="Confirm Password"
-              type="password"
+              type={
+                visiblePassword.includes("c_password") ? "text" : "password"
+              }
               startContent={<FaCheckCircle />}
               {...passwordRegister("c_password")}
+              isInvalid={!!passwordErrors.c_password}
               errorMessage={passwordErrors.c_password?.message}
+              endContent={
+                <button
+                  aria-label="toggle password visibility"
+                  className="focus:outline-none"
+                  type="button"
+                  onClick={() => togglePasswords("c_password")}
+                >
+                  {visiblePassword.includes("c_password") ? (
+                    <FaEyeSlash className="text-2xl text-foreground pointer-events-none" />
+                  ) : (
+                    <FaEye className="text-2xl text-foreground pointer-events-none" />
+                  )}
+                </button>
+              }
             />
           </div>
           <Button fullWidth size="lg" color="warning" type="submit">

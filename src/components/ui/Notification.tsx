@@ -13,6 +13,7 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
+  Tooltip,
 } from "@heroui/react";
 import { BiSolidMessage, BiBell, BiUserPlus } from "react-icons/bi";
 import { FiAlertTriangle } from "react-icons/fi";
@@ -92,8 +93,8 @@ const NotificationDropdown = () => {
     <>
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
-          <div className="bg-[#1e1e1e] relative rounded-full p-3 cursor-pointer">
-            <BiBell className="text-yellow-500" size={25} />
+          <div className="transition-background hover:bg-[#1e1e1e] relative rounded-full p-2 cursor-pointer">
+            <BiBell className="text-yellow-500" size={35} />
             <div className="absolute top-0 right-1 scale-80">
               <Chip radius="md" color="danger" size="sm">
                 <span className="font-bold">{notifications.length}</span>
@@ -122,7 +123,7 @@ const NotificationDropdown = () => {
                     </div>
                   </DropdownItem>
                   {index + 1 !== notifications.length && (
-                    <DropdownItem key="">
+                    <DropdownItem key={index}>
                       <Divider />
                     </DropdownItem>
                   )}
@@ -141,7 +142,9 @@ const NotificationDropdown = () => {
             <>
               <ModalHeader>Notification Details</ModalHeader>
               <ModalBody>
-                <div className="w-fit m-auto">{iconTypes[(selectedNotification?.type as string)]}</div>
+                <div className="w-fit m-auto">
+                  {iconTypes[selectedNotification?.type as string]}
+                </div>
                 <p className="mt-2 font-semibold">
                   {selectedNotification?.message}
                 </p>

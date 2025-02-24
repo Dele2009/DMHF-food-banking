@@ -28,7 +28,7 @@ import {
   BiRefresh,
 } from "react-icons/bi";
 import Input from "../../components/ui/Input";
-import axios from "axios";
+import { axios } from "../../config/axios";
 
 const columns = [
   { name: "TITLE", uid: "title", sortable: true },
@@ -86,7 +86,7 @@ export default function ViewRequestsPage() {
     try {
       const {
         data: { data },
-      } = await axios.get("/api/auth/testReq", {
+      } = await axios.get("//", {
         params: {
           status: statusFilter || "all",
           search: filterValue,
@@ -183,9 +183,8 @@ export default function ViewRequestsPage() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem key="view">View</DropdownItem>
-                <DropdownItem key="edit">Edit</DropdownItem>
-                <DropdownItem key="delete">Delete</DropdownItem>
+                <DropdownItem key="view" color="warning">View</DropdownItem>
+                <DropdownItem key="delete" color="danger">Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>

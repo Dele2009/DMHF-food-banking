@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Main Pages
 import HomePage from "./pages/(main)/home";
@@ -52,6 +52,7 @@ export const Router = () => {
           </ProtectedRoute>
         }
       >
+        <Route index element={<Navigate to="/member/dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="requests/new" element={<RequestHelpPage />} />
         <Route path="requests/all" element={<ViewRequestsPage />} />

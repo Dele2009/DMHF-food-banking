@@ -18,7 +18,7 @@ interface ProfileToggleProps {
   avatarUrl?: AvatarProps["src"];
   email: string;
   avatarClassName?: string;
-  dropDownProps?: DropdownProps;
+  dropDownProps?: Omit<DropdownProps, "children">;
 }
 const ProfileToggle = ({
   firstname,
@@ -32,17 +32,19 @@ const ProfileToggle = ({
   return (
     <Dropdown {...dropDownProps} placement="bottom-end">
       <DropdownTrigger>
-        <div className="flex cursor-pointer scale-85 rounded-3xl border-2 p-1.5 border-yellow-500 gap-3 justify-center items-center max-w-[170px]">
-          <Avatar
-            isBordered
-            as="div"
-            className={`size-36 transition-transform font-bold ${avatarClassName}`}
-            color="primary"
-            name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
-            size="md"
-            src={avatarUrl}
-          />
-          <span className="truncate ">
+        <div className="flex cursor-pointer scale-85 rounded-full md:border-2 p-1.5 md:border-yellow-500 gap-3 justify-center items-center md:max-w-[150px]">
+          <div className="w-auto md:w-[40px]">
+            <Avatar
+              isBordered
+              as="div"
+              className={`size-36 transition-transform font-bold block ${avatarClassName}`}
+              color="primary"
+              name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
+              size="md"
+              src={avatarUrl}
+            />
+          </div>
+          <span className="hidden md:inline-block md:truncate">
             Hi, {firstname} {lastname}
           </span>
         </div>
@@ -59,7 +61,7 @@ const ProfileToggle = ({
           <Link to="/member/dashboard">My Dashboard</Link>
         </DropdownItem>
         <DropdownItem key="team_settings">
-          <Link to="#">Profile Settings</Link>
+          <Link to="/member/settings/profile">Profile Settings</Link>
         </DropdownItem>
         {/* <DropdownItem key="analytics">Analytics</DropdownItem>
         <DropdownItem key="system">System</DropdownItem>

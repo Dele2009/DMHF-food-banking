@@ -8,8 +8,11 @@ import {
   FaCheckCircle,
   FaTimesCircle,
 } from "react-icons/fa";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Dashboard() {
+    const { user } = useAuth();
+
   const assistanceRequested = true; // Simulated state, replace with actual logic
   const daysRemaining = 89; // Simulated countdown, replace with actual logic
   const progressPercentage = ((90 - daysRemaining) / 90) * 100; // Simulated progress
@@ -20,7 +23,7 @@ export default function Dashboard() {
       <div className="flex items-center space-x-4 bg-[#1e1e1e] p-6 rounded-lg shadow-md">
         <Avatar  src="/user-avatar.jpg" size="lg" alt="User Avatar" />
         <div>
-          <h2 className="text-xl font-semibold">Welcome Back, John Doe</h2>
+          <h2 className="text-xl font-semibold">Welcome Back, {user?.first_name} {user?.last_name}</h2>
           <p className="text-gray-400">Here's an overview of your requests.</p>
         </div>
       </div>

@@ -7,12 +7,13 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { useEffect, useState } from "react";
 import { getLocalTimeZone, today } from "@internationalized/date";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { axios } from "../../config/axios";
 const schema = yup.object().shape({
   title: yup.string().required("Title is required"),
-  details: yup.string().required("Details is required"),
-  date: yup
+  body: yup.string().required("Details is required"),
+  preferred_date: yup
     .date()
     .required("Date is required")
     .min(
@@ -45,9 +46,9 @@ const RequestHelpPage = () => {
       console.log(formdata);
       const formattedData = {
         ...formdata,
-        date: new Date(formdata.date).toLocaleDateString(),
+        preferred_date: new Date(formdata.preferred_date).toLocaleDateString(),
       };
-      const { data } = await axios.post("/api/auth/addReq", formattedData);
+      const { data } = await axios.post("/request-help/", formattedData);
       reset();
       toast.success(data.message);
     } catch (err: AxiosError | any) {
@@ -95,9 +96,9 @@ const RequestHelpPage = () => {
           <Textarea
             isDisabled={isLoading}
             label="Request Details"
-            {...register("details")}
-            isInvalid={!!errors.details}
-            errorMessage={errors.details?.message}
+            {...register("body")}
+            isInvalid={!!errors.body}
+            errorMessage={errors.body?.message}
             variant="bordered"
             classNames={{
               inputWrapper:
@@ -108,7 +109,7 @@ const RequestHelpPage = () => {
             rows={4}
           />
           <Controller
-            name="date"
+            name="preferred_date"
             control={control}
             render={({ field }) => (
               <DatePicker
@@ -121,8 +122,8 @@ const RequestHelpPage = () => {
                 // onChange={setDate}
                 {...field}
                 value={field.value as unknown as DateValue}
-                errorMessage={errors.date?.message}
-                isInvalid={!!errors.date}
+                errorMessage={errors.preferred_date?.message}
+                isInvalid={!!errors.preferred_date}
                 label="Preferred Collection Date"
                 minValue={today(getLocalTimeZone())}
               />

@@ -11,13 +11,13 @@ hydrateRoot(
   document.getElementById("root") as HTMLElement,
   <StrictMode>
     <ThemeProvider>
-      <AuthProvider>
-        <PaymentProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <PaymentProvider>
             <App />
-          </BrowserRouter>
-        </PaymentProvider>
-      </AuthProvider>
+          </PaymentProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </ThemeProvider>
   </StrictMode>
 );

@@ -9,7 +9,11 @@ import {
   Button,
   useDisclosure,
 } from "@heroui/react";
-import { FaSignOutAlt, FaTimesCircle, FaExclamationTriangle } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaTimesCircle,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import { AxiosError } from "axios";
 import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
@@ -20,7 +24,8 @@ export type UserType = {
   first_name: string;
   last_name: string;
   email: string;
-  type: string;
+  is_admin: boolean;
+  profile_picture: string;
 };
 
 export type AuthContextType = {
@@ -50,8 +55,6 @@ const initialState = {
 };
 
 function reducer(state: any, action: any) {
-  console.log(action);
-
   switch (action.type) {
     case "SET_AUTH_EMAIL":
       return {
