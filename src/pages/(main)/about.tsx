@@ -153,7 +153,7 @@ const AboutUsPage = () => {
                 initial={{ opacity: 0, x: "100%" }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false }}
-                transition={{ delay: 4, duration: 0.5 }}
+                transition={{ delay: 4, duration: 0.5, }}
                 className="text-center"
               >
                 <h3 className="text-xl font-semibold">Steven Park</h3>
