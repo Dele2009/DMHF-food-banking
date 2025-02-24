@@ -35,7 +35,7 @@ const ContactForm = () => {
             </div>
             <div className="mt-4 " >
               <h2 className=" flex gap-2 text-2xl font-extrabold" >
-                <FaMailBulk className="text-yellow-500 text-2xl" />   E-mail</h2>
+                <FaMailBulk className="text-yellow-500 text-2xl" />  E-mail</h2>
               <div className="" >
                 <p className="">support@dmhf.org</p>
               </div>
