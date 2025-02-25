@@ -15,6 +15,8 @@ axios.interceptors.request.use(
     const user: UserType = JSON.parse(Cookies.get("user") || "null");
     if (token && user) {
       if (isTokenExpired(token.access)) {
+        Cookies.remove("token");      
+        Cookies.remove("user");      
         window.location.href = "/auth/sign-in";
       } else {
         config.headers.Authorization = `Bearer ${token.access}`;

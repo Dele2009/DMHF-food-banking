@@ -41,13 +41,19 @@ const RequestHelpPage = () => {
   });
 
   const onSubmit = async (formdata: RequestFormData) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       console.log(formdata);
+      // Date formatt  YYYY-MM-DD
+      const date = new Date(formdata.preferred_date);
+      const formattedDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
       const formattedData = {
         ...formdata,
-        preferred_date: new Date(formdata.preferred_date).toLocaleDateString(),
+        preferred_date: formattedDate,
       };
+      console.log(formattedData);
       const { data } = await axios.post("/request-help/", formattedData);
       reset();
       toast.success(data.message);
@@ -58,17 +64,6 @@ const RequestHelpPage = () => {
       setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  //   const values = getValues()
-  //   console.log(values);
-  //   console.log("This is the date", date);
-  //   const { day, month, year } = date
-  //   console.log(day)
-  //   console.log(new Date(year, month, day))
-  // }, [date])
-  // // const today = new Date().toLocaleString()
-  // const today = new Date();
-  // today.setHours(0, 0, 0, 0);
 
   return (
     <div className="p-2 md:p-6 space-y-6 w-full max-w-3xl mx-auto">

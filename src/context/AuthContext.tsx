@@ -19,6 +19,7 @@ import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 import { axios } from "../config/axios";
 import Cookies from "js-cookie";
+import { isTokenExpired } from "../utils/app/time";
 
 export type UserType = {
   first_name: string;
@@ -89,7 +90,8 @@ export default function AuthProvider({
 
   useEffect(() => {
     const user = JSON.parse(Cookies.get("user") || "null");
-    if (user) {
+    const token = JSON.parse(Cookies.get("token") || "null");
+    if (user && !isTokenExpired(token.access)) {
       dispatch({ type: "SIGN_IN", payload: user });
     }
   }, []);
