@@ -48,7 +48,7 @@ const ContactForm = () => {
           </section>
 
           {/* Right Section */}
-          <div className=" md:mt-4 lg:mt-10  md:text-left">
+          <div className="md:mt-2 lg:mt-10  md:text-left">
             <section>
               <h2 className="flex items-center gap-2 text-xl font-semibold justify-center md:justify-start">
                 <FaPhoneAlt className="text-yellow-500 text-xl" /> Phone
