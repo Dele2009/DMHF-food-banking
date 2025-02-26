@@ -27,6 +27,7 @@ const schema = yup.object().shape({
 });
 
 type ContactFormData = yup.InferType<typeof schema>;
+
 const ContactForm = () => {
   const {
     formState: { errors },

@@ -39,7 +39,7 @@ const ProfileToggle = ({
               as="div"
               className={`size-36 transition-transform font-bold block ${avatarClassName}`}
               color="primary"
-              name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
+              // name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
               size="md"
               src={avatarUrl}
             />

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
+import { requestNotificationPermission } from "./utils/app/AppNotifications";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -8,7 +9,8 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { isAuthenticated, user } = useAuth();
-  
+  useEffect(requestNotificationPermission, []);
+
   // return children;
   return isAuthenticated ? (
     children

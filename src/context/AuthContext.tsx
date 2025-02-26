@@ -93,6 +93,9 @@ export default function AuthProvider({
     const token = JSON.parse(Cookies.get("token") || "null");
     if (user && !isTokenExpired(token.access)) {
       dispatch({ type: "SIGN_IN", payload: user });
+    } else {
+      Cookies.remove("user")
+      Cookies.remove("token")
     }
   }, []);
 
@@ -114,6 +117,7 @@ export default function AuthProvider({
         backdrop="blur"
         isDismissable={false}
         isOpen={isOpen}
+        placement="center"
         onOpenChange={onOpenChange}
         size="md"
       >

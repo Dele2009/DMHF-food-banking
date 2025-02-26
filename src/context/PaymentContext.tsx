@@ -87,6 +87,7 @@ export const PaymentProvider = ({
       <Modal
         isOpen={isOpen}
         backdrop="blur"
+        placement="center"
         onOpenChange={onOpenChange}
         size="md"
       >

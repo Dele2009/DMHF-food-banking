@@ -42,20 +42,18 @@ export default function Navbar() {
     <Nav
       isBordered
       classNames={{ wrapper: "!w-full !max-w-full lg:px-20" }}
+      isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        
         <NavbarBrand as={Link} to="/">
           <Logo size={20} />
           <p className="font-bold text-inherit">ACME</p>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden lg:flex gap-4" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={index} isActive={item.path === currentPath}>
             <NavLink
@@ -89,7 +87,7 @@ export default function Navbar() {
             </NavbarItem>
           </>
         ) : (
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className="flex">
             <ProfileToggle
               firstname={user?.first_name as string}
               lastname={user?.last_name as string}
@@ -97,6 +95,10 @@ export default function Navbar() {
             />
           </NavbarItem>
         )}
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="lg:hidden"
+        />
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
@@ -106,6 +108,7 @@ export default function Navbar() {
               color={item.path !== currentPath ? "foreground" : "warning"}
               as={Link}
               to={item.path}
+              onPress={() => setIsMenuOpen(false)}
               size="lg"
             >
               {item.label}
@@ -119,6 +122,7 @@ export default function Navbar() {
               color="warning"
               as={Link}
               to="/auth/sign-in"
+              onPress={() => setIsMenuOpen(false)}
             >
               Sign In
             </NavLink>
@@ -127,6 +131,7 @@ export default function Navbar() {
               as={Link}
               color="warning"
               to="/auth/sign-up"
+              onPress={() => setIsMenuOpen(false)}
               variant="flat"
             >
               Sign Up
