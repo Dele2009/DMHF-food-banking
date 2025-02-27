@@ -1,4 +1,4 @@
-import { Textarea, } from "@heroui/react";
+import { Textarea,  } from "@heroui/react";
 import Input from "../../components/ui/Input";
 import BgImage from "../../components/ui/BgImage";
 import {
@@ -7,6 +7,9 @@ import {
   FaPhoneAlt, FaUser,
 } from "react-icons/fa";
 const ContactForm = () => {
+
+
+
   return (
     <div className="min-h-screen bg-white/10 ">
 
@@ -122,11 +125,13 @@ const ContactForm = () => {
                   labelPlacement="inside"
                   fullWidth
                   classNames={{ innerWrapper: "border-yellow-500" }}
+                 
                   variant="bordered"
                 />
               </div>
-
-              <button className="w-full text-2xl mb-5 font-semibold bg-yellow-400 text-white py-2 rounded-lg hover:bg-yellow-600">
+              <button className="w-full text-2xl mb-5 font-semibold bg-yellow-400
+               text-white py-2 rounded-lg hover:bg-yellow-600"
+              >
                 Send
               </button>
             </form>

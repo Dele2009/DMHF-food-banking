@@ -40,7 +40,7 @@ export default function SignInPage() {
     reset,
     formState: { errors },
     watch,
-  } = useForm<FormData>({
+  } = useForm<FormData>({ 
     resolver: yupResolver(schema),
   });
 
