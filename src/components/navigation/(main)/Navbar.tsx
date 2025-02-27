@@ -71,9 +71,14 @@ export default function Navbar() {
         {!isAuthenticated ? (
           <>
             <NavbarItem className="hidden lg:flex">
-              <NavLink as={Link} to="/auth/sign-in">
+              <Button
+                as={Link}
+                color="primary"
+                to="/auth/sign-in"
+                variant="bordered"
+              >
                 Sign In
-              </NavLink>
+              </Button>
             </NavbarItem>
             <NavbarItem className="hidden lg:flex">
               <Button
@@ -117,15 +122,16 @@ export default function Navbar() {
         ))}
         <NavbarMenuItem>
           <div className="flex justify-center">
-            <NavLink
-              className="w-full flex justify-center"
-              color="warning"
+            <Button
+              className="w-full"
               as={Link}
+              color="primary"
               to="/auth/sign-in"
               onPress={() => setIsMenuOpen(false)}
+              variant="bordered"
             >
               Sign In
-            </NavLink>
+            </Button>
             <Button
               className="w-full"
               as={Link}

@@ -42,14 +42,14 @@ const ContactForm = () => {
     console.log(formdata)
   }
   return (
-    <div className="min-h-screen bg-white/10 ">
+    <div className="min-h-screen">
       <div className="min-w-full max-h-80 ">
         <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
           <section className="py-28 text-center ">
-            <h1 className="flex items-center justify-center gap-2 font-extrabold text-2xl -mt-14">
-              <FaPhoneAlt className="text-yellow-300" /> CONTACT US
+            <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
+              <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT US
             </h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-lg mb-6 text-gray-300">
               Contact us through the form below
             </p>
           </section>
@@ -59,8 +59,8 @@ const ContactForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-9 m-auto">
         {/* ADDRESS */}
         <div
-          className="flex flex-col md:flex-row items-center md:items-start gap-10 bg-white/10 px-5 py-5 mt-14
-         rounded-2xl shadow-2xl w-full max-w-4xl mx-auto md:h-80 "
+          className="flex flex-col md:flex-row items-center md:items-start gap-10 px-5 py-5 mt-14
+         rounded-2xl w-full max-w-4xl mx-auto md:h-80 "
         >
           {/* Left Section */}
           <section className="text-center md:text-left">
@@ -102,7 +102,7 @@ const ContactForm = () => {
 
         {/* fORM  */}
         <section className=" flex mt-4 mb-2  ">
-          <div className="bg-white/10 px-5 p-5 rounded-2xl shadow-2xl w-full m-auto">
+          <div className="px-5 p-5 rounded-2xl w-full m-auto">
             <h1 className="text-2xl font-semibold text-center text-white mb-3 ">
               Send Message
             </h1>

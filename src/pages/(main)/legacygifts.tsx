@@ -68,11 +68,11 @@ const PlanLegacyGiftsPage = () => {
     <div className="min-h-screen text-gray-800">
       <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
         <section className="py-16 text-center">
-          <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
+          <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
             <FaGifts className="inline text-yellow-600 mr-2" /> Plan Your Legacy
             Gifts
           </h1>
-          <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+          <p className="text-lg mb-6 text-gray-300">
             Create a lasting impact through thoughtful and meaningful
             contributions.
           </p>

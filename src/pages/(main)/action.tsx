@@ -18,10 +18,10 @@ const ActionsPage = () => {
       {/* Header Section */}
       <BgImage src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg">
         <section className="py-16 text-center">
-          <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
+          <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
             Take Action
           </h1>
-          <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+          <p className="text-lg mb-6 text-gray-300">
             Empower communities by supporting our initiatives
           </p>
         </section>
