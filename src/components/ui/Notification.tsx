@@ -123,7 +123,7 @@ const NotificationDropdown = () => {
                     </div>
                   </DropdownItem>
                   {index + 1 !== notifications.length && (
-                    <DropdownItem key={index}>
+                    <DropdownItem key={index * 5}>
                       <Divider />
                     </DropdownItem>
                   )}

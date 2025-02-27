@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Card, Button, Avatar, Alert } from "@heroui/react";
+import {
+  Card,
+  Button,
+  Avatar,
+  Alert,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalHeader,
+  Skeleton,
+} from "@heroui/react";
 import {
   FaUser,
   FaEnvelope,
@@ -15,6 +26,10 @@ import {
   FaEye,
 } from "react-icons/fa";
 import Input from "../../components/ui/Input";
+import OtpModal from "../../components/ui/OtpModal";
+import { BiFile } from "react-icons/bi";
+import CameraCapture from "../../components/ui/CameraCapture";
+import { dataUrlToFile } from "../../utils/app/text";
 
 const FILE_SIZE_LIMIT = 2 * 1024 * 1024; // 2MB
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png", "image/jpg"];
@@ -38,10 +53,10 @@ const schema = yup.object().shape({
     .string()
     .min(10, "Phone number must be at least 10 characters long")
     .required("Phone number is required"),
-  nin_number: yup
-    .string()
-    .min(11, "NIN number must be 11 characters long")
-    .required("NIN number is required"),
+  // nin_number: yup
+  //   .string()
+  //   .min(11, "NIN number must be 11 characters long")
+  //   .required("NIN number is required"),
 
   avatar: yup
     .mixed()
@@ -56,21 +71,6 @@ const schema = yup.object().shape({
     .test("fileType", "Unsupported file format", (value) => {
       return value && SUPPORTED_FORMATS.includes((value as FileList)[0]?.type);
     }),
-  // .test(
-  //   "fileDimensions",
-  //   "Image must be within 500x500 pixels",
-  //   async (value) => {
-  //     if (!value || (value as FileList).length === 0) return false;
-  //     const file = (value as FileList)[0];
-
-  //     // Read the image and get dimensions
-  //     const dimensions = await getImageDimensions(file);
-  //     console.log(dimensions);
-  //     return (
-  //       dimensions.width === MAX_WIDTH && dimensions.height === MAX_HEIGHT
-  //     );
-  //   }
-  // ),
 });
 
 const getImageDimensions = (
@@ -103,11 +103,25 @@ type PersonalDetaisType = yup.InferType<typeof schema>;
 type PasswordsType = yup.InferType<typeof passwordSchema>;
 
 export default function ProfilePage() {
+  const { isOpen, onOpenChange, onOpen } = useDisclosure();
+  const {
+    isOpen: isPictureModalOpen,
+    onOpenChange: onOpenPictureModalChange,
+    onOpen: onOpenPictureModal,
+    onClose: onClosePictureModal,
+  } = useDisclosure();
+  const {
+    isOpen: isCaptureModalOpen,
+    onOpenChange: onOpenCaptureModalChange,
+    onOpen: onOpenCaptureModal,
+    onClose: onCloseCaptureModal,
+  } = useDisclosure();
   const {
     register,
     handleSubmit,
     watch,
     clearErrors,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -121,7 +135,23 @@ export default function ProfilePage() {
   });
 
   const [avatar, setAvatar] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [visiblePassword, setVisiblePassword] = useState<string[]>([]);
+
+  //Fetch Initial Details
+  useEffect(() => {
+    (async () => {
+      try {
+        await new Promise((resolve) =>
+          setTimeout(() => resolve({ data: "ok" }), 10000)
+        );
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
 
   const togglePasswords = (type: string) =>
     setVisiblePassword((prev) =>
@@ -138,6 +168,8 @@ export default function ProfilePage() {
       // reset avatar error by default
 
       if (selectedFile && selectedFile.length > 0) {
+        onClosePictureModal();
+        onCloseCaptureModal();
         const file = selectedFile[0];
         // const dimensions = await getImageDimensions(file);
         // console.log(dimensions);
@@ -164,6 +196,7 @@ export default function ProfilePage() {
   };
   const onPasswordSubmit = (data: PasswordsType) => {
     console.log("Updated User Details:", data);
+    onOpen();
   };
 
   return (
@@ -184,68 +217,99 @@ export default function ProfilePage() {
             isClosable
             onClose={() => clearErrors("avatar")}
           />
+          {isLoading ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div className="w-full h-[250px] sm:h-[400px] md:h-auto mx-auto md:col-span-2">
+                  <Skeleton className="w-full h-full max-h-full mx-auto rounded-lg" />
+                </div>
+                <div className="grid grid-cols-1 gap-4 md:col-span-3">
+                  <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-lg" />
+                  <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-lg" />
+                  <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-lg" />
+                </div>
+              </div>
+              <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-lg" />
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div className="relative w-full h-[250px] sm:h-[400px] md:h-auto mx-auto md:col-span-2">
+                  <Avatar
+                    src={avatar}
+                    size="lg"
+                    radius="md"
+                    alt="User Avatar"
+                    ignoreFallback={!!avatar}
+                    fallback={<FaUser size={70} />}
+                    className="w-full h-full max-h-full mx-auto object-cover"
+                  />
+                  <div
+                    onClick={onOpenPictureModal}
+                    className="absolute bottom-2 right-2 bg-[#1e1e1e] p-3 rounded-full cursor-pointer"
+                  >
+                    <FaCamera className="text-yellow-500" size={20} />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 gap-4 md:col-span-3">
+                  <Input
+                    label="First Name"
+                    startContent={<FaUser />}
+                    {...register("first_name")}
+                    errorMessage={errors.first_name?.message}
+                  />
+                  <Input
+                    label="Last Name"
+                    startContent={<FaUser />}
+                    {...register("last_name")}
+                    errorMessage={errors.last_name?.message}
+                  />
+                  <Input
+                    label="Email Address"
+                    startContent={<FaEnvelope />}
+                    {...register("email")}
+                    errorMessage={errors.email?.message}
+                  />
+                </div>
+              </div>
+              <Input
+                label="Phone Number"
+                startContent={<FaPhone />}
+                {...register("phone_number")}
+                errorMessage={errors.phone_number?.message}
+              />
+              {/* <Input
+                label="NIN Number"
+                startContent={<FaIdCard />}
+                {...register("nin_number")}
+                errorMessage={errors.nin_number?.message}
+              /> */}
+              <Button fullWidth size="lg" color="warning" type="submit">
+                Update Profile
+              </Button>
+            </>
+          )}
+        </form>
+        {/* <div className="space-y-4">
+          <h1 className="text-2xl text-yellow-500 font-bold">
+            Personal Details
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="relative w-full h-[250px] sm:h-[400px] md:h-auto mx-auto md:col-span-2">
-              <Avatar
-                src={avatar}
-                size="lg"
-                radius="md"
-                alt="User Avatar"
-                ignoreFallback={!!avatar}
-                fallback={<FaUser size={70} />}
-                className="w-full h-full max-h-full mx-auto object-cover"
-              />
-              <label
-                htmlFor="avatar-upload"
-                className="absolute bottom-2 right-2 bg-[#1e1e1e] p-3 rounded-full cursor-pointer"
-              >
-                <FaCamera className="text-yellow-500" size={20} />
-              </label>
-              <input
-                id="avatar-upload"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                {...register("avatar")}
-              />
+            <div className="w-full h-[250px] sm:h-[400px] md:h-auto mx-auto md:col-span-2">
+              <Skeleton className="w-full h-full max-h-full mx-auto rounded-md" />
             </div>
             <div className="grid grid-cols-1 gap-4 md:col-span-3">
-              <Input
-                label="First Name"
-                startContent={<FaUser />}
-                {...register("first_name")}
-                errorMessage={errors.first_name?.message}
-              />
-              <Input
-                label="Last Name"
-                startContent={<FaUser />}
-                {...register("last_name")}
-                errorMessage={errors.last_name?.message}
-              />
-              <Input
-                label="Email Address"
-                startContent={<FaEnvelope />}
-                {...register("email")}
-                errorMessage={errors.email?.message}
-              />
+              <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-md" />
+              <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-md" />
+              <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-md" />
             </div>
           </div>
-          <Input
-            label="Phone Number"
-            startContent={<FaPhone />}
-            {...register("phone_number")}
-            errorMessage={errors.phone_number?.message}
-          />
-          <Input
-            label="NIN Number"
-            startContent={<FaIdCard />}
-            {...register("nin_number")}
-            errorMessage={errors.nin_number?.message}
-          />
+          <Skeleton className="w-full h-[60px] max-h-full mx-auto rounded-md" />
+
           <Button fullWidth size="lg" color="warning" type="submit">
             Update Profile
           </Button>
-        </form>
+        </div> */}
       </Card>
       <Card
         radius="sm"
@@ -311,6 +375,85 @@ export default function ProfilePage() {
           </Button>
         </form>
       </Card>
+      <OtpModal
+        authDetails={{ email: "mdkmdkmdvkm@dmvkd.com" }}
+        onOpenChange={onOpenChange}
+        isOpen={isOpen}
+      />
+      <Modal
+        isDismissable={false}
+        size="lg"
+        backdrop="blur"
+        placement="center"
+        onOpenChange={onOpenPictureModalChange}
+        isOpen={isPictureModalOpen}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Change Profile Picture</ModalHeader>
+              <ModalBody>
+                <div className="w-full grid grid-cols-1  md:grid-cols-2 gap-4 p-5">
+                  <label
+                    // onClick={onClose}
+                    htmlFor="avatar-upload"
+                    className="block space-y-3 w-[100%] cursor-pointer rounded-md border border-yellow-500 p-3"
+                  >
+                    <div className="w-fit mx-auto">
+                      <BiFile size={45} className="text-yellow-500" />
+                      <input
+                        id="avatar-upload"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        {...register("avatar")}
+                      />
+                    </div>
+                    <p className="text-center text-yellow-500">
+                      Pick from files
+                    </p>
+                  </label>
+                  <div
+                    onClick={() => {
+                      onOpenCaptureModal();
+                      onClose();
+                    }}
+                    className="rounded-md space-y-3 w-[100%] cursor-pointer border border-yellow-500 p-3"
+                  >
+                    <div className="w-fit mx-auto">
+                      <FaCamera size={45} className="text-yellow-500" />
+                    </div>
+                    <p className="text-center text-yellow-500">Take a selfie</p>
+                  </div>
+                </div>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <Modal
+        isDismissable={false}
+        size="lg"
+        placement="center"
+        onOpenChange={onOpenCaptureModalChange}
+        isOpen={isCaptureModalOpen}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Capture New Profile Photo</ModalHeader>
+              <ModalBody>
+                <CameraCapture
+                  onCapture={(url, filename) => {
+                    const file = dataUrlToFile(url, filename);
+                    setValue("avatar", [file]);
+                  }}
+                />
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

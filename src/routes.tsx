@@ -24,8 +24,24 @@ import AuthLayout from "./layouts/(main)/authlayout";
 import MemberLayout from "./layouts/(user)/MemberLayout";
 
 import ProtectedRoute from "./Protected";
+import { Spinner } from "@heroui/react";
+import { useEffect, useState } from "react";
 
 export const Router = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <Spinner color="warning" size="lg" classNames={{base: "scale-[1.5]"}} />
+      </div>
+    );
+  }
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

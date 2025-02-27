@@ -26,15 +26,17 @@ import {
   BiDotsVertical,
   BiChevronDown,
   BiRefresh,
+  BiWifiOff,
 } from "react-icons/bi";
 import Input from "../../components/ui/Input";
 import { axios } from "../../config/axios";
+import { AxiosError } from "axios";
 
 const columns = [
   { name: "TITLE", uid: "title", sortable: true },
-  { name: "DETAILS", uid: "details", sortable: true },
+  { name: "DETAILS", uid: "body", sortable: true },
   { name: "REQUEST-DATE", uid: "request_date", sortable: true },
-  { name: "PICKUP-DATE", uid: "pickup_date" },
+  { name: "PREFERRED-DATE", uid: "preferred_date" },
   { name: "STATUS", uid: "status" },
   { name: "ACTIONS", uid: "actions" },
 ];
@@ -43,9 +45,11 @@ const statusOptions = [
   { name: "Approved", uid: "approved" },
   { name: "Pending", uid: "pending" },
   { name: "Rejected", uid: "rejected" },
+  { name: "Fulfiled", uid: "fulfiled" },
 ];
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
+  fulfiled: "primary",
   approved: "success",
   pending: "warning",
   rejected: "danger",
@@ -59,13 +63,14 @@ type Requests = {
   details: string;
   request_date: string;
   pickup_date: string;
-  status: "approved" | "pending" | "rejected" | string;
+  status: "approved" | "pending" | "rejected" | "fulfiled" | string;
 };
 
 export default function ViewRequestsPage() {
   const [requests, setRequests] = useState<Requests[]>([]);
   const [pages, setPages] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const [errorType, setErrorType] = useState("");
   const [loadingState, setLoadingState] =
     useState<TableBodyProps<Requests>["loadingState"]>("idle");
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]));
@@ -85,8 +90,8 @@ export default function ViewRequestsPage() {
     setLoadingState("loading");
     try {
       const {
-        data: { data },
-      } = await axios.get("//", {
+        data
+      } = await axios.get("/all-requests/", {
         params: {
           status: statusFilter || "all",
           search: filterValue,
@@ -95,11 +100,12 @@ export default function ViewRequestsPage() {
         },
       });
       console.log(data);
-      setPages(data.totalPages);
-      setRequests(data.requests);
+      setPages(data.total_number_of_pages);
+      setRequests(data.result);
       setLoadingState("idle");
-    } catch (error) {
+    } catch (error: AxiosError | any) {
       console.error(error);
+      setErrorType(error?.response?.data?.message || error.message)
       setLoadingState("error");
     }
   };
@@ -379,10 +385,15 @@ export default function ViewRequestsPage() {
       <TableBody
         className="divide-y-2 divide-white/20"
         emptyContent={
-          <div className="flex flex-col items-center justify-center py-10">
+          errorType === "Network Error" ? (
+            <div className="flex flex-col items-center justify-center py-10">
+            <BiWifiOff size={50} className="text-[#ff0000]" />
+            <p className="text-default-400 mt-4">{errorType}</p>
+          </div>
+          ): (<div className="flex flex-col items-center justify-center py-10">
             <BiSearch size={50} className="text-default-400" />
             <p className="text-default-400 mt-4">No requests found</p>
-          </div>
+          </div>)
         }
         loadingContent={<Spinner color="warning" />}
         loadingState={loadingState}

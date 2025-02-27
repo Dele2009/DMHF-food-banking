@@ -1,29 +1,40 @@
-import React from "react";
+import { useEffect } from "react";
 import { Card, Button, Alert, Progress, Avatar } from "@heroui/react";
 import {
   FaUserFriends,
   FaClock,
-  FaPlusCircle,
-  FaClipboardList,
   FaCheckCircle,
   FaTimesCircle,
 } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
+import { axios } from "../../config/axios";
 
 export default function Dashboard() {
-    const { user } = useAuth();
+  const { user } = useAuth();
+
+
 
   const assistanceRequested = true; // Simulated state, replace with actual logic
   const daysRemaining = 89; // Simulated countdown, replace with actual logic
   const progressPercentage = ((90 - daysRemaining) / 90) * 100; // Simulated progress
 
+  useEffect(() => {
+    // Fetch
+    (async () => {
+      const { data } = await axios.get("/user/stats/");
+      console.log(data);
+    })();
+  }, []);
+
   return (
     <div className="p-6 space-y-6">
       {/* User Welcome Section */}
       <div className="flex items-center space-x-4 bg-[#1e1e1e] p-6 rounded-lg shadow-md">
-        <Avatar  src="/user-avatar.jpg" size="lg" alt="User Avatar" />
+        <Avatar isBordered as="div" src={undefined} size="lg" />
         <div>
-          <h2 className="text-xl font-semibold">Welcome Back, {user?.first_name} {user?.last_name}</h2>
+          <h2 className="text-xl font-semibold">
+            Welcome Back, {user?.first_name} {user?.last_name}
+          </h2>
           <p className="text-gray-400">Here's an overview of your requests.</p>
         </div>
       </div>
@@ -31,8 +42,8 @@ export default function Dashboard() {
       {/* Assistance Status Alert */}
       {assistanceRequested && (
         <Alert color="warning" className="mb-6">
-          You have an active
-          assistance request. You can request again in {daysRemaining} days.
+          You have an active assistance request. You can request again in{" "}
+          {daysRemaining} days.
         </Alert>
       )}
 
