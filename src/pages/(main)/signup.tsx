@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Form, Divider } from "@heroui/react";
+import { Form, Divider, addToast } from "@heroui/react";
 import { Logo } from "../../components/navigation/(main)/Navbar";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
@@ -137,13 +137,21 @@ export default function SignUpPage() {
 
       if (Array.from(Object.keys(errors)).length > 0) return;
 
-      const response = await axios.post("/api/auth/verify-nin", {
+      const {data} = await axios.post("/api/auth/verify-nin", {
         nin: otherFields.nin_number,
       });
-      toast.success("NIN is valid");
-      console.log(response);
+      // toast.success("NIN is valid");
+      addToast({
+        description: data.message || "NIN is invalid",
+        color: "danger",
+      });
+      console.log(data);
     } catch (error: AxiosError | any) {
-      toast.error(error.response.data.message || "NIN is invalid");
+      // toast.error(error.response.data.message || "NIN is invalid");
+      addToast({
+        description: error.response.data.message || error.message,
+        color: "danger",
+      });
       console.error(error);
     } finally {
       setIsVerifyNin(false);
@@ -160,11 +168,16 @@ export default function SignUpPage() {
       const response = await signUp(formData);
       dispatch({ type: "SET_AUTH_EMAIL", payload: Formdata.email });
       reset();
-      toast.success(response.data.message);
+      // toast.success(response.data.message);
+      
       navigate("/auth/verify");
     } catch (error: any) {
       console.error(error);
-      toast.error(error.response?.data?.message || error.message);
+      // toast.error(error.response?.data?.message || error.message);
+      addToast({
+        description: error.response.data.message || error.message,
+        color: "danger",
+      });
     } finally {
       setLoading(false);
     }

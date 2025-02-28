@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Form, Divider } from "@heroui/react";
+import { Form, Divider, addToast } from "@heroui/react";
 import { Logo } from "../../components/navigation/(main)/Navbar";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
@@ -68,11 +68,21 @@ export default function SignInPage() {
       Cookies.set("user", JSON.stringify({ ...userDetails }));
       reset();
       dispatch({ type: "SIGN_IN", payload: { ...userDetails } });
-      toast.success("Logged in sucessfully");
+      // toast.success("Logged in sucessfully");
+       addToast({
+         title: "Login Status",
+         description: data.message || "Logged in sucessfully",
+         color: "success",
+       });
       navigate("/member/dashboard");
     } catch (error: any) {
       console.error(error);
-      toast.error(error.response?.data?.detail || error.message);
+      // toast.error(error.response?.data?.detail || error.message);
+      addToast({
+        title: "Login Status",
+        description: error.response?.data?.detail || error.message,
+        color: "danger",
+      });
     } finally {
       setLoading(false);
     }

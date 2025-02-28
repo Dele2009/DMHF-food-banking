@@ -8,6 +8,7 @@ import {
   InputOtp,
   UseDisclosureProps,
   Button,
+  addToast,
 } from "@heroui/react";
 import { resendOtp, verifyOtp } from "../../utils/api/auth";
 import { AxiosError } from "axios";
@@ -59,7 +60,7 @@ export default function OtpModal({
           error: "Failed to resend OTP",
         },
       });
-      setWaitTime((prev)=>prev + 120);
+      setWaitTime((prev) => prev + 120);
       console.log(data.message);
     } catch (err: AxiosError | any) {
       console.log(err);
@@ -69,10 +70,15 @@ export default function OtpModal({
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const messageSettings: ToastOptions = {
-     position: "top-center"
-    }
+      position: "top-center",
+    };
     if (!authDetails.email) {
-      toast.error("Email address is required", messageSettings);
+      // error("Email address is required", messageSettings);
+      addToast({
+        title: "Field Error",
+        description: "Email address is required",
+        color: "danger",
+      });
       return;
     }
     setLoading(true);
@@ -82,17 +88,27 @@ export default function OtpModal({
         otp,
       };
       console.log(verifydata);
-       const formData = new FormData();
-       Object.entries(verifydata).forEach(([key, value]) => {
-         formData.append(key, value);
-       });
-       const { data } = await verifyOtp(formData);
-       console.log(data);
-       toast.success(data.message || "Otp verified successfully", messageSettings);
-       setOtp("");
+      const formData = new FormData();
+      Object.entries(verifydata).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      const { data } = await verifyOtp(formData);
+      console.log(data);
+      // toast.success(, messageSettings);
+      addToast({
+        title: "OTP",
+        description: data.message || "Otp verified successfully",
+        color: "success",
+      });
+      setOtp("");
     } catch (err: AxiosError | any) {
       console.error(err);
-      toast.error(err.response?.data.message || err.message, messageSettings);
+      // toast.error(err.response?.data.message || err.message, messageSettings);
+      addToast({
+        title: "OTP Error",
+        description: err.response?.data.message || err.message,
+        color: "danger",
+      });
     } finally {
       setLoading(false);
     }

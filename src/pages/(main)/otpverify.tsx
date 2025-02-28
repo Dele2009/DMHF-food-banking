@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { InputOtp, Tooltip } from "@heroui/react";
+import { addToast, InputOtp, Tooltip } from "@heroui/react";
 import { Logo } from "../../components/navigation/(main)/Navbar";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
@@ -34,7 +34,12 @@ export default function VerifyOtpPage() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!authEmail) {
-      toast.error("Please sign up to verify your email");
+      // toast.error();
+      addToast({
+        title: "Field Error",
+        description: "Please sign up to verify your email",
+        color: "danger",
+      });
       navigate("/auth/sign-up");
     } else {
       setMaskedEmail(maskMail(authEmail as string))
@@ -91,7 +96,12 @@ export default function VerifyOtpPage() {
   const onSubmit = async (verifydata: OtpData) => {
     setLoading(true);
     if (errors.email) {
-      toast.error(errors.email.message);
+      // toast.error(errors.email.message);
+      addToast({
+        title: "Field Error",
+        description: errors.email.message,
+        color: "danger",
+      });
       return;
     }
     try {
@@ -103,10 +113,21 @@ export default function VerifyOtpPage() {
       console.log(data);
       reset();
       navigate("/auth/sign-in");
-      toast.success(data.message);
+      // toast.success(data.message);
+      addToast({
+        title: "OTP Status",
+        description: data.message,
+        color: "success",
+      });
+      
     } catch (err: AxiosError | any) {
       console.error(err);
-      toast.error(err.response?.data.message || err.message);
+      // toast.error(err.response?.data.message || err.message);
+      addToast({
+        title: "OTP Status",
+        description: err.response?.data.message || err.message,
+        color: "danger",
+      });
     } finally {
       setLoading(false);
     }

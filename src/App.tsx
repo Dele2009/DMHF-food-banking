@@ -4,6 +4,7 @@ import { useTheme } from "./hooks/useTheme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./hooks/useAuth";
+import { ToastProvider } from "@heroui/react";
 
 function App() {
   // const { prefersDarkMode, isDarkMode, addDarkClass } = useTheme();
@@ -15,20 +16,14 @@ function App() {
   //     localStorage.setItem("prefersDarkmode", "true");
   //   }
   // }, []);
-  const {LogoutModal} = useAuth()
+  const { LogoutModal } = useAuth();
 
   return (
-    <main
-      className={`text-gray-900 dark:text-gray-100 yellow-theme-dark`}
-    >
+    <main className={`text-gray-900 dark:text-gray-100 yellow-theme-dark`}>
       <Router />
-      <ToastContainer
-        limit={2}
-        hideProgressBar
-        pauseOnHover
-        theme="dark"
-      />
-      <LogoutModal/>
+      <ToastContainer limit={2} hideProgressBar pauseOnHover theme="dark" />
+      <ToastProvider placement="top-right" />
+      <LogoutModal />
     </main>
   );
 }
