@@ -1,4 +1,4 @@
-import { Textarea, Button } from "@heroui/react";
+import { Textarea, Button, Form } from "@heroui/react";
 import Input from "../../components/ui/Input";
 import BgImage from "../../components/ui/BgImage";
 import {
@@ -13,8 +13,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
-  first_name: yup.string().required("This Field is required"),
-  last_name: yup.string().required("This Field is required"),
+  first_name: yup.string().min(2, "Name must be at least 2 characters long")
+    .required("This Field is required"),
+  last_name: yup.string().min(2, "Name must be at least 2 characters long")
+    .required("This Field is required"),
   email: yup
     .string()
     .email("Provide a valid email address")
@@ -42,14 +44,14 @@ const ContactForm = () => {
     console.log(formdata)
   }
   return (
-    <div className="min-h-screen  ">
+    <div className="min-h-screen">
       <div className="min-w-full max-h-80 ">
         <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
           <section className="py-28 text-center ">
-            <h1 className="flex items-center justify-center gap-2 font-extrabold text-2xl -mt-14">
-              <FaPhoneAlt className="text-yellow-300" /> CONTACT US
+            <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
+              <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT US
             </h1>
-            <p className="text-gray-300 text-lg">
+            <p className="text-lg mb-6 text-gray-300">
               Contact us through the form below
             </p>
           </section>
@@ -60,7 +62,7 @@ const ContactForm = () => {
         {/* ADDRESS */}
         <div
           className="flex flex-col md:flex-row items-center md:items-start gap-10 px-5 py-5 mt-14
-         rounded-2xl shadow-2xl w-full max-w-4xl mx-auto md:h-80 "
+         rounded-2xl w-full max-w-4xl mx-auto md:h-80 "
         >
           {/* Left Section */}
           <section className="text-center md:text-left">
@@ -102,7 +104,7 @@ const ContactForm = () => {
 
         {/* fORM  */}
         <section className=" flex mt-4 mb-2  ">
-          <div className=" px-5 p-5 rounded-2xl shadow-2xl w-full m-auto">
+          <div className="px-5 p-5 rounded-2xl w-full m-auto">
             <h1 className="text-2xl font-semibold text-center text-white mb-3 ">
               Send Message
             </h1>
@@ -110,8 +112,8 @@ const ContactForm = () => {
               We Will get back to you ASAP!
             </p>
 
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <Form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
                 <Input
                   isClearable
                   isRequired
@@ -134,57 +136,49 @@ const ContactForm = () => {
                 />
               </div>
 
-              <div className="flex space-y-2">
-                <div className="flex items-center w-full border-gray-300 rounded-lg">
-                  <Input
-                    isClearable
-                    isRequired
-                    label="Email Address"
-                    {...register("email")}
-                    isInvalid={!!errors.email}
-                    errorMessage={errors.email?.message}
-                    type="email"
-                    startContent={
-                      <FaEnvelope className="text-yellow-500 text-xl" />
-                    }
-                  />
-                </div>
-              </div>
-              <div className="flex space-y-2">
-                <Input
-                  isClearable
-                  isRequired
-                  label="Phone Number"
-                  {...register("phone_number")}
-                  isInvalid={!!errors.phone_number}
-                  errorMessage={errors.phone_number?.message}
-                  type="number"
-                  startContent={
-                    <FaPhoneAlt className="text-yellow-500 text-lg" />
-                  }
-                />
-              </div>
-              <div className="flex space-x-2">
-                <Textarea
-                  isRequired
-                  label="Enter Your Message here!"
-                  {...register("message")}
-                  isInvalid={!!errors.message}
-                  errorMessage={errors.message?.message}
-                  fullWidth
-                  classNames={{
-                    inputWrapper:
-                      "border-yellow-500 group-data-[focus=true]:border-yellow-500",
-                    input: "dark:!bg-white dark:autofill:bg-white !text-white",
-                  }}
-                  variant="bordered"
-                />
-              </div>
+              <Input
+                isClearable
+                isRequired
+                label="Email Address"
+                {...register("email")}
+                isInvalid={!!errors.email}
+                errorMessage={errors.email?.message}
+                type="email"
+                startContent={
+                  <FaEnvelope className="text-yellow-500 text-xl" />
+                }
+              />
+              <Input
+                isClearable
+                isRequired
+                label="Phone Number"
+                {...register("phone_number")}
+                isInvalid={!!errors.phone_number}
+                errorMessage={errors.phone_number?.message}
+                type="number"
+                startContent={
+                  <FaPhoneAlt className="text-yellow-500 text-lg" />
+                }
+              />
+              <Textarea
+                isRequired
+                label="Enter Your Message here!"
+                {...register("message")}
+                isInvalid={!!errors.message}
+                errorMessage={errors.message?.message}
+                fullWidth
+                classNames={{
+                  inputWrapper:
+                    "border-yellow-500 group-data-[focus=true]:border-yellow-500",
+                  input: "dark:!bg-white dark:autofill:bg-white !text-white",
+                }}
+                variant="bordered"
+              />
 
               <Button size="lg" fullWidth type="submit" color="warning">
                 Send
               </Button>
-            </form>
+            </Form>
           </div>
         </section>
       </div>
