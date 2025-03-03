@@ -12,14 +12,14 @@ const ProtectedRoute = ({ children, type = null }: ProtectedRouteProps) => {
   const { isAuthenticated, user } = useAuth();
   useEffect(requestNotificationPermission, []);
 
-  // if(type){
-  //   if(type === "user" && user?.is_admin){
-  //     return <Navigate to="/admin-panel" />
-  //   }
-  //   if(type === "admin" && !user?.is_admin){
-  //     return <Navigate to="/auth/sign-in" />
-  //   }
-  // }
+  if(type){
+    if(type === "user" && user?.is_admin){
+      return <Navigate to="/admin-panel" />
+    }
+    if(type === "admin" && !user?.is_admin){
+      return <Navigate to="/auth/sign-in" />
+    }
+  }
 
   // return children;
   return isAuthenticated ? (
