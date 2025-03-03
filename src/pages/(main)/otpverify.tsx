@@ -14,6 +14,7 @@ import { verifyOtp, resendOtp } from "../../utils/api/auth";
 import { maskMail } from "../../utils/app/text";
 import { createCountdown } from "../../utils/app/time";
 import { axios } from "../../config/axios";
+import { PageMeta } from "../../utils/app/pageMetaValues";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid Details Provided"),
@@ -134,6 +135,14 @@ export default function VerifyOtpPage() {
   };
 
   return (
+    <>
+    <PageMeta>
+      <meta
+        name="description"
+        content="Verify your email address to proceed"
+      />
+      <title>Verify Email</title>
+    </PageMeta>
     <div className=" w-full max-w-md mx-auto min-h-screen flex flex-col justify-center items-center py-16">
       <Link to="/" className="block mb-10">
         <Logo size={45} />
@@ -199,5 +208,6 @@ export default function VerifyOtpPage() {
         </Button>
       </form>
     </div>
+    </>
   );
 }

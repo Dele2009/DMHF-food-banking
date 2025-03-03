@@ -5,8 +5,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./hooks/useAuth";
 import { ToastProvider } from "@heroui/react";
+import { usePayment } from "./hooks/usePayStack";
 
 function App() {
+  const {PaymentModal} = usePayment()
   // const { prefersDarkMode, isDarkMode, addDarkClass } = useTheme();
   // // check user prefered theme for system / browser first load
   // // then set the theme accordingly
@@ -23,6 +25,8 @@ function App() {
       <Router />
       <ToastContainer limit={2} hideProgressBar pauseOnHover theme="dark" />
       <ToastProvider placement="top-right" />
+              <PaymentModal />
+      
       <LogoutModal />
     </main>
   );

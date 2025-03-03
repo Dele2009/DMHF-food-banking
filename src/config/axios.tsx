@@ -5,7 +5,7 @@ import { UserType } from "../context/AuthContext";
 import { isTokenExpired } from "../utils/app/time";
 
 export const axios = axiosInstance.create({
-  baseURL: `${import.meta.env.VITE_API_URL}`,
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
 });
 
 // Add a request interceptor

@@ -13,22 +13,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 interface ProfileToggleProps {
-  firstname: string;
-  lastname: string;
-  avatarUrl?: AvatarProps["src"];
-  email: string;
   avatarClassName?: string;
   dropDownProps?: Omit<DropdownProps, "children">;
 }
 const ProfileToggle = ({
-  firstname,
-  lastname,
-  avatarUrl = undefined,
-  email,
   avatarClassName,
   dropDownProps,
 }: ProfileToggleProps) => {
-  const { openLogoutModal } = useAuth();
+  const { openLogoutModal, user } = useAuth();
   return (
     <Dropdown {...dropDownProps} placement="bottom-end">
       <DropdownTrigger>
@@ -41,20 +33,20 @@ const ProfileToggle = ({
               color="primary"
               // name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
               size="md"
-              src={avatarUrl}
+              src={user?.profile_pic || undefined}
             />
           </div>
           <span className="hidden md:inline-block md:truncate">
-            Hi, {firstname} {lastname}
+            Hi, {user?.first_name} {user?.last_name}
           </span>
         </div>
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem key="profile" className="h-14 gap-2">
           <p className="font-semibold">Signed in as</p>
-          <p className="font-semibold">{email}</p>
+          <p className="font-semibold">{user?.email}</p>
         </DropdownItem>
-        <DropdownItem key="">
+        <DropdownItem key="divider-1">
           <Divider />
         </DropdownItem>
         <DropdownItem key="dashboard">
@@ -66,10 +58,10 @@ const ProfileToggle = ({
         {/* <DropdownItem key="analytics">Analytics</DropdownItem>
         <DropdownItem key="system">System</DropdownItem>
         <DropdownItem key="configurations">Configurations</DropdownItem> */}
-        <DropdownItem key="">
+        <DropdownItem key="help">
           <Link to="#">Help & Feedback</Link>
         </DropdownItem>
-        <DropdownItem key="">
+        <DropdownItem key="divider-2">
           <Divider />
         </DropdownItem>
         <DropdownItem key="logout" color="danger">
