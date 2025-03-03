@@ -91,9 +91,9 @@ export const Router = () => {
         <Route
           path=""
           element={
-            <ProtectedRoute type="admin">
+            // <ProtectedRoute type="admin">
             <AdminLayout />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         >
           <Route path="dashboard" element={<AdminDashboard />} />
