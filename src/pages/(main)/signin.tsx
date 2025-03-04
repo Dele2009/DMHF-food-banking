@@ -114,23 +114,19 @@ export default function SignInPage() {
       <div className="h-screen grid grid-cols-1 lg:grid-cols-2 gap-5 mx-auto w-full place-items-center">
         <Carousel
           showArrows={false}
+          showIndicators={false}
           autoPlay
           className="hidden lg:block h-full"
         >
           <img
-            src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
-            alt="Slide 1"
-            className="w-full h-full object-cover bg-red-400"
-          />
-          <img
-            src="/vite.svg"
+            src="/About.jpeg"
             alt="Slide 2"
             className="w-full h-full object-cover bg-blue-400"
           />
           <img
-            src="https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg"
-            alt="Slide 3"
-            className="w-full h-full object-cover bg-yellow-400"
+            src="/home.jpg"
+            alt="Slide 1"
+            className="w-full h-full object-cover"
           />
         </Carousel>
         <div className="w-full h-full px-5 mx-auto flex flex-col justify-center items-center py-5">

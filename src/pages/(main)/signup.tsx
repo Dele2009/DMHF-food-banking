@@ -196,23 +196,19 @@ export default function SignUpPage() {
       <div className="overflow-hidden h-screen grid grid-cols-1 lg:grid-cols-2 w-full place-items-center">
         <Carousel
           showArrows={false}
+          showIndicators={false}
           autoPlay
           className="hidden lg:block h-full"
         >
           <img
-            src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
+            src="/home.jpg"
             alt="Slide 1"
             className="w-full h-full object-cover"
           />
           <img
-            src="/vite.svg"
+            src="/About.jpeg"
             alt="Slide 2"
             className="w-full h-full object-cover bg-blue-400"
-          />
-          <img
-            src="https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg"
-            alt="Slide 3"
-            className="w-full h-full object-cover"
           />
         </Carousel>
         <div className="w-full h-screen overflow-y-auto mx-auto flex flex-col justify-center items-center  px-10">
