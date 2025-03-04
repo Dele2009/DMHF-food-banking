@@ -57,7 +57,7 @@ const AboutUsPage = () => {
       </PageMeta>
 
       <div className="min-h-screen text-foreground">
-        <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
+        <BgImage src="/About.jpeg">
           {/* Header Section */}
           <motion.section
             transition={{ delay: 4 }}
@@ -150,8 +150,7 @@ const AboutUsPage = () => {
                 <motion.div
                   initial={{ opacity: 0, x: "-100%" }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ delay: 4, duration: 0.5 }}
+                  transition={{ duration: 0.5 }}
                   className="text-center"
                 >
                   <h3 className="text-xl font-semibold">Ayeni Tosin Clement</h3>
@@ -163,8 +162,7 @@ const AboutUsPage = () => {
                 <motion.div
                   initial={{ opacity: 0, x: "100%" }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ delay: 4, duration: 0.5 }}
+                  transition={{ duration: 0.5 }}
                   className="text-center"
                 >
                   <h3 className="text-xl font-semibold">Steven Park</h3>
