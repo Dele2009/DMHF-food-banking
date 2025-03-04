@@ -8,28 +8,32 @@ import {
   FiCheckCircle,
   FiBookmark,
 } from "react-icons/fi";
-import {BsCheckCircle, BsClock, BsHourglass} from "react-icons/bs";
+import { BsCheckCircle, BsClock, BsHourglass } from "react-icons/bs";
 
 import { Outlet } from "react-router-dom";
 // import { useBreakpoint } from "../../hooks/useBreakpoint";
-import DashboardSidebar, { LinkType } from "../../components/navigation/(user)/DashboardSidebar";
-import DashboardHeader from "../../components/navigation/(user)/DashboardHeader";
-import { UseBreakpoint } from "../../hooks/useBreakpoint";
+import DashboardSidebar, {
+  LinkType,
+} from "../../../components/navigation/(user)/DashboardSidebar";
+import DashboardHeader from "../../../components/navigation/(user)/DashboardHeader";
+import { UseBreakpoint } from "../../../hooks/useBreakpoint";
 
 export default function MemberLayout() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [useBreakpoint, setUseBreakpoint] = useState<UseBreakpoint>({
     viewportWidth: 0,
-    breakpoint: ()=> false
+    breakpoint: () => false,
   });
   useEffect(() => {
-    import("../../hooks/useBreakpoint").then((module) => {
-      const hooks = module.useBreakpoint()
-      setUseBreakpoint(hooks);
-    }).catch(err=>{
-      console.error(err)
-    })
-  }, [])
+    import("../../../hooks/useBreakpoint")
+      .then((module) => {
+        const hooks = module.useBreakpoint();
+        setUseBreakpoint(hooks);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   const { viewportWidth, breakpoint } = useBreakpoint;
 
   const SidebarLinks: LinkType[] = [

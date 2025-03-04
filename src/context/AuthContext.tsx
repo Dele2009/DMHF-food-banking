@@ -27,7 +27,7 @@ export type UserType = {
   last_name: string;
   email: string;
   is_admin: boolean;
-  profile_picture: string;
+  profile_pic: string;
 };
 
 export type AuthContextType = {
@@ -70,6 +70,11 @@ function reducer(state: any, action: any) {
         user: action.payload,
         authEmail: null,
       };
+    case "UPDATE_PROFILE":
+      return {
+        ...state,
+        user: action.payload,
+      };
     case "SIGN_OUT":
       return {
         ...state,
@@ -86,8 +91,12 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const removeUser = () => {
+    Cookies.remove("user");
+    Cookies.remove("token");
+  };
 
   useEffect(() => {
     const user = JSON.parse(Cookies.get("user") || "null");
@@ -95,32 +104,34 @@ export default function AuthProvider({
     if (user && !isTokenExpired(token.access)) {
       dispatch({ type: "SIGN_IN", payload: user });
     } else {
-      Cookies.remove("user")
-      Cookies.remove("token")
+      removeUser()
     }
   }, []);
 
   const signOut = async () => {
-    try {
-      const response = await axios.post("/");
-      console.log(response.data);
+    // try {
+      // const response = await axios.post("/");
+      // const response = await new Promise(resolve=> setTimeout(resolve, 3000))
+      // console.log(response.data);
       // toast.success("Sign out successful");
-       addToast({
-         title: "Logout Status",
-         description: "Sign out successful",
-         color: "success",
-       });
-      
+      removeUser()
       dispatch({ type: "SIGN_OUT" });
-    } catch (err: AxiosError | any) {
-      console.log(err.response?.data);
-      // toast.error(err.response?.data.message);
       addToast({
         title: "Logout Status",
-        description: err.response?.data.message || err.message,
-        color: "danger",
+        description: "Sign out successful",
+        color: "success",
       });
-    }
+      onClose()
+      // window.location.href = "/auth/sign-in";
+    // } catch (err: AxiosError | any) {
+    //   console.log(err.response?.data);
+    //   // toast.error(err.response?.data.message);
+    //   addToast({
+    //     title: "Logout Status",
+    //     description: err.response?.data.message || err.message,
+    //     color: "danger",
+    //   });
+    // }
   };
 
   const LogoutModal = () => {
@@ -158,7 +169,7 @@ export default function AuthProvider({
                   size="lg"
                   color="danger"
                   startContent={<FaSignOutAlt className="" />}
-                  // onPress={onConfirm}
+                  onPress={signOut}
                 >
                   Logout
                 </Button>

@@ -93,11 +93,7 @@ export default function Navbar() {
           </>
         ) : (
           <NavbarItem className="flex">
-            <ProfileToggle
-              firstname={user?.first_name as string}
-              lastname={user?.last_name as string}
-              email={user?.email as string}
-            />
+            <ProfileToggle/>
           </NavbarItem>
         )}
         <NavbarMenuToggle

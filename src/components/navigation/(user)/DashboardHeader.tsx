@@ -7,7 +7,6 @@ import { Logo } from "../(main)/Navbar";
 import { useAuth } from "../../../hooks/useAuth";
 
 function DashboardHeader({ toggleSidebar, isOpen }: { toggleSidebar: () => void; isOpen: boolean; }) {
-  const {user} = useAuth()
   return (
     <>
       <header className="fixed z-40 flex h-16 w-full items-center justify-between text-white bg-black px-6 border-b border-white/20">
@@ -22,11 +21,7 @@ function DashboardHeader({ toggleSidebar, isOpen }: { toggleSidebar: () => void;
         </div>
         <div className="flex items-center space-x-1">
           <NotificationDropdown />
-          <ProfileToggle
-            firstname={user?.first_name as string}
-            lastname={user?.last_name as string}
-            email={user?.email as string}
-          />
+          <ProfileToggle/>
         </div>
       </header>
     </>

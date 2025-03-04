@@ -29,245 +29,194 @@ import Input from "../../components/ui/Input";
 
 const columns = [
   // { name: "ID", uid: "id", sortable: true },
+  { name: "USERNAME", uid: "name", sortable: true },
   { name: "TITLE", uid: "title", sortable: true },
   { name: "DETAILS", uid: "age", sortable: true },
-  { name: "ROLE", uid: "role", sortable: true },
-  { name: "TEAM", uid: "team" },
   { name: "EMAIL", uid: "email" },
-  { name: "STATUS", uid: "status", sortable: true },
   { name: "ACTIONS", uid: "actions" },
 ];
 
-const statusOptions = [
-  { name: "Active", uid: "active" },
-  { name: "Paused", uid: "paused" },
-  { name: "Vacation", uid: "vacation" },
-];
+
 
 const users = [
   {
     id: 1,
     name: "Tony Reichert",
-    role: "CEO",
-    team: "Management",
-    status: "active",
-    age: "29",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+    title: "Tony Reichert",
+    body: "CEO",
+    profile_pic: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
     email: "tony.reichert@example.com",
   },
   {
     id: 2,
     name: "Zoey Lang",
-    role: "Tech Lead",
-    team: "Development",
-    status: "paused",
-    age: "25",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+    title: "Zoey Lang",
+    body: "Tech Lead",
+    profile_pic: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
     email: "zoey.lang@example.com",
   },
   {
     id: 3,
     name: "Jane Fisher",
-    role: "Sr. Dev",
-    team: "Development",
-    status: "active",
-    age: "22",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+    title: "Jane Fisher",
+    body: "Sr. Dev",
+    profile_pic: "https://i.pravatar.cc/150?u=a04258114e29026702d",
     email: "jane.fisher@example.com",
   },
   {
     id: 4,
     name: "William Howard",
-    role: "C.M.",
-    team: "Marketing",
-    status: "vacation",
-    age: "28",
-    avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
+    title: "William Howard",
+    body: "C.M.",
+    profile_pic: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
     email: "william.howard@example.com",
   },
   {
     id: 5,
     name: "Kristen Copper",
-    role: "S. Manager",
-    team: "Sales",
-    status: "active",
-    age: "24",
-    avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
+    title: "Kristen Copper",
+    body: "S. Manager",
+    profile_pic: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
     email: "kristen.cooper@example.com",
   },
   {
     id: 6,
     name: "Brian Kim",
-    role: "P. Manager",
-    team: "Management",
-    age: "29",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+    title: "Brian Kim",
+    body: "P. Manager",
+    profile_pic: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
     email: "brian.kim@example.com",
-    status: "Active",
   },
   {
     id: 7,
     name: "Michael Hunt",
-    role: "Designer",
-    team: "Design",
-    status: "paused",
-    age: "27",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29027007d",
+    title: "Michael Hunt",
+    body: "Designer",
+    profile_pic: "https://i.pravatar.cc/150?u=a042581f4e29027007d",
     email: "michael.hunt@example.com",
   },
   {
     id: 8,
     name: "Samantha Brooks",
-    role: "HR Manager",
-    team: "HR",
-    status: "active",
-    age: "31",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e27027008d",
+    title: "Samantha Brooks",
+    body: "HR Manager",
+    profile_pic: "https://i.pravatar.cc/150?u=a042581f4e27027008d",
     email: "samantha.brooks@example.com",
   },
   {
     id: 9,
     name: "Frank Harrison",
-    role: "F. Manager",
-    team: "Finance",
-    status: "vacation",
-    age: "33",
-    avatar: "https://i.pravatar.cc/150?img=4",
+    title: "Frank Harrison",
+    body: "F. Manager",
+    profile_pic: "https://i.pravatar.cc/150?img=4",
     email: "frank.harrison@example.com",
   },
   {
     id: 10,
     name: "Emma Adams",
-    role: "Ops Manager",
-    team: "Operations",
-    status: "active",
-    age: "35",
-    avatar: "https://i.pravatar.cc/150?img=5",
+    title: "Emma Adams",
+    body: "Ops Manager",
+    profile_pic: "https://i.pravatar.cc/150?img=5",
     email: "emma.adams@example.com",
   },
   {
     id: 11,
     name: "Brandon Stevens",
-    role: "Jr. Dev",
-    team: "Development",
-    status: "active",
-    age: "22",
-    avatar: "https://i.pravatar.cc/150?img=8",
+    title: "Brandon Stevens",
+    body: "Jr. Dev",
+    profile_pic: "https://i.pravatar.cc/150?img=8",
     email: "brandon.stevens@example.com",
   },
   {
     id: 12,
     name: "Megan Richards",
-    role: "P. Manager",
-    team: "Product",
-    status: "paused",
-    age: "28",
-    avatar: "https://i.pravatar.cc/150?img=10",
+    title: "Megan Richards",
+    body: "P. Manager",
+    profile_pic: "https://i.pravatar.cc/150?img=10",
     email: "megan.richards@example.com",
   },
   {
     id: 13,
     name: "Oliver Scott",
-    role: "S. Manager",
-    team: "Security",
-    status: "active",
-    age: "37",
-    avatar: "https://i.pravatar.cc/150?img=12",
+    title: "Oliver Scott",
+    body: "S. Manager",
+    profile_pic: "https://i.pravatar.cc/150?img=12",
     email: "oliver.scott@example.com",
   },
   {
     id: 14,
     name: "Grace Allen",
-    role: "M. Specialist",
-    team: "Marketing",
-    status: "active",
-    age: "30",
-    avatar: "https://i.pravatar.cc/150?img=16",
+    title: "Grace Allen",
+    body: "M. Specialist",
+    profile_pic: "https://i.pravatar.cc/150?img=16",
     email: "grace.allen@example.com",
   },
   {
     id: 15,
     name: "Noah Carter",
-    role: "IT Specialist",
-    team: "I. Technology",
-    status: "paused",
-    age: "31",
-    avatar: "https://i.pravatar.cc/150?img=15",
+    title: "Noah Carter",
+    body: "IT Specialist",
+    profile_pic: "https://i.pravatar.cc/150?img=15",
     email: "noah.carter@example.com",
   },
   {
     id: 16,
     name: "Ava Perez",
-    role: "Manager",
-    team: "Sales",
-    status: "active",
-    age: "29",
-    avatar: "https://i.pravatar.cc/150?img=20",
+    title: "Ava Perez",
+    body: "Manager",
+    profile_pic: "https://i.pravatar.cc/150?img=20",
     email: "ava.perez@example.com",
   },
   {
     id: 17,
     name: "Liam Johnson",
-    role: "Data Analyst",
-    team: "Analysis",
-    status: "active",
-    age: "28",
-    avatar: "https://i.pravatar.cc/150?img=33",
+    title: "Liam Johnson",
+    body: "Data Analyst",
+    profile_pic: "https://i.pravatar.cc/150?img=33",
     email: "liam.johnson@example.com",
   },
   {
     id: 18,
     name: "Sophia Taylor",
-    role: "QA Analyst",
-    team: "Testing",
-    status: "active",
-    age: "27",
-    avatar: "https://i.pravatar.cc/150?img=29",
+    title: "Sophia Taylor",
+    body: "QA Analyst",
+    profile_pic: "https://i.pravatar.cc/150?img=29",
     email: "sophia.taylor@example.com",
   },
   {
     id: 19,
     name: "Lucas Harris",
-    role: "Administrator",
-    team: "Information Technology",
-    status: "paused",
-    age: "32",
-    avatar: "https://i.pravatar.cc/150?img=50",
+    title: "Lucas Harris",
+    body: "Administrator",
+    profile_pic: "https://i.pravatar.cc/150?img=50",
     email: "lucas.harris@example.com",
   },
   {
     id: 20,
     name: "Mia Robinson",
-    role: "Coordinator",
-    team: "Operations",
-    status: "active",
-    age: "26",
-    avatar: "https://i.pravatar.cc/150?img=45",
+    title: "Mia Robinson",
+    body: "Coordinator",
+    profile_pic: "https://i.pravatar.cc/150?img=45",
     email: "mia.robinson@example.com",
   },
 ];
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+
 
 type User = (typeof users)[0];
 
-export default function ViewRequestsPage() {
-  const [visibleColumns, setVisibleColumns] = useState<Selection>(
-    new Set(INITIAL_VISIBLE_COLUMNS)
-  );
-  const headerColumns = useMemo(() => {
-    if (visibleColumns === "all") return columns;
+export default function PendingRequestsPage() {
+//   const [visibleColumns, setVisibleColumns] = useState<Selection>(
+//     new Set(INITIAL_VISIBLE_COLUMNS)
+//   );
+//   const headerColumns = useMemo(() => {
+//     if (visibleColumns === "all") return columns;
 
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid)
-    );
-  }, [visibleColumns]);
+//     return columns.filter((column) =>
+//       Array.from(visibleColumns).includes(column.uid)
+//     );
+//   }, [visibleColumns]);
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]));
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -288,11 +237,6 @@ export default function ViewRequestsPage() {
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
         user.name.toLowerCase().includes(filterValue.toLowerCase())
-      );
-    }
-    if (statusFilter.size && !statusFilter.has("all")) {
-      filteredUsers = filteredUsers.filter((user) =>
-        statusFilter.has(user.status)
       );
     }
 
@@ -364,33 +308,33 @@ export default function ViewRequestsPage() {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
+            avatarProps={{ radius: "lg", src: user.profile_pic }}
             description={user.email}
             name={cellValue}
           >
             {user.email}
           </User>
         );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
+     //  case "role":
+     //    return (
+     //      <div className="flex flex-col">
+     //        <p className="text-bold text-small capitalize">{cellValue}</p>
+     //        <p className="text-bold text-tiny capitalize text-default-400">
+     //          {user.team}
+     //        </p>
+     //      </div>
+     //    );
+     //  case "status":
+     //    return (
+     //      <Chip
+     //        className="capitalize"
+     //        color={statusColorMap[user.status]}
+     //        size="sm"
+     //        variant="flat"
+     //      >
+     //        {cellValue}
+     //      </Chip>
+     //    );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
@@ -426,37 +370,7 @@ export default function ViewRequestsPage() {
             onClear={() => onClear()}
             onValueChange={onSearchChange}
           />
-          <div className="flex gap-3">
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={
-                    <BiChevronDown size={20} className="text-small" />
-                  }
-                  variant="flat"
-                  color="warning"
-                >
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={statusFilter}
-                selectionMode="single"
-                onSelectionChange={onStatusChange}
-              >
-                <>
-                  <DropdownItem key="all">All</DropdownItem>
-                  {statusOptions.map((status) => (
-                    <DropdownItem key={status.uid} className="capitalize">
-                      {status.name}
-                    </DropdownItem>
-                  ))}
-                </>
-              </DropdownMenu>
-            </Dropdown>
+          {/* <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button
@@ -487,7 +401,7 @@ export default function ViewRequestsPage() {
             <Button color="primary" endContent={<BiPlus />}>
               Add New
             </Button>
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
@@ -510,7 +424,6 @@ export default function ViewRequestsPage() {
   }, [
     filterValue,
     statusFilter,
-    visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
     users.length,
@@ -589,7 +502,7 @@ export default function ViewRequestsPage() {
       onSelectionChange={setSelectedKeys}
       onSortChange={onSortChange}
     >
-      <TableHeader columns={headerColumns}>
+      <TableHeader columns={columns}>
         {(column) => (
           <TableColumn
             key={column.uid}

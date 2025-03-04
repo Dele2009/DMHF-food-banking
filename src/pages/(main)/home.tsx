@@ -6,6 +6,7 @@ import BgImage from "../../components/ui/BgImage";
 import { useEffect, useState } from "react";
 import { usePayment, usePaystackPayment } from "../../hooks/usePayStack";
 import { PaymentDetailsType } from "../../context/PaymentContext";
+import { PageMeta } from "../../utils/app/pageMetaValues";
 
 // https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-9924.jpg
 // https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg
@@ -13,15 +14,19 @@ import { PaymentDetailsType } from "../../context/PaymentContext";
 // src="https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg"
 
 const HomePage = () => {
-  const { PaymentModal, openPaymentModal } = usePayment();
+  const { openPaymentModal } = usePayment();
   return (
     <>
+      <PageMeta>
+        <meta
+          name="description"
+          content="Welcome to the Divine Mandate Humanitarian Foundation (DMHF), Empowering Sustainable Livelihoods in Nigeria"
+        />
+        <title>DMHF | Home</title>
+      </PageMeta>
+
       <div className="min-h-screen transition-all duration-500">
-        <PaymentModal />
-        <BgImage
-          src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg"
-        >
-          {/* <div className="absolute top-0 w-full h-full bg-black/20 dark:bg-black/50  !z-10" /> */}
+        <BgImage src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg">
           {/* Hero Section */}
           <section className="py-16 text-center">
             <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
