@@ -30,6 +30,8 @@ import OtpModal from "../../components/ui/OtpModal";
 import { BiFile } from "react-icons/bi";
 import CameraCapture from "../../components/ui/CameraCapture";
 import { dataUrlToFile } from "../../utils/app/text";
+import { axios } from "../../config/axios";
+import { AxiosError } from "axios";
 
 const FILE_SIZE_LIMIT = 2 * 1024 * 1024; // 2MB
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png", "image/jpg"];
@@ -101,8 +103,11 @@ const passwordSchema = yup.object().shape({
 
 type PersonalDetaisType = yup.InferType<typeof schema>;
 type PasswordsType = yup.InferType<typeof passwordSchema>;
+type UserDetails = Omit<PersonalDetaisType, "avatar">
 
 export default function ProfilePage() {
+const [defaultData, setDefaultData] = useState<UserDetails | null>(null);
+
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
   const {
     isOpen: isPictureModalOpen,
@@ -134,21 +139,29 @@ export default function ProfilePage() {
     resolver: yupResolver(passwordSchema),
   });
 
+  
   const [avatar, setAvatar] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [visiblePassword, setVisiblePassword] = useState<string[]>([]);
+  const [profileError, setProfileError] = useState("")
 
   //Fetch Initial Details
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
+      setProfileError("")
       try {
-        await new Promise((resolve) =>
-          setTimeout(() => resolve({ data: "ok" }), 10000)
-        );
-      } catch (error) {
-        console.error(error);
-      } finally {
+        const { data } = await axios.get("/auth/users/me/")
+        const { profile_pic, nin_number, ...otherDetails } = data
+        setAvatar(profile_pic);
+        Object.entries(otherDetails).forEach(([key, value]) => {
+          setValue(key as keyof UserDetails, value as string);
+        })
+        console.log(data)
         setIsLoading(false);
+      } catch (error: AxiosError | any) {
+        console.error(error);
+        setProfileError(error?.response?.data?.message || error.message)
       }
     })();
   }, []);
@@ -212,10 +225,10 @@ export default function ProfilePage() {
           <Alert
             color="danger"
             variant="faded"
-            title={errors.avatar?.message}
-            isVisible={!!errors.avatar}
+            title={profileError}
+            isVisible={Boolean(profileError)}
             isClosable
-            onClose={() => clearErrors("avatar")}
+            onClose={() => setProfileError("")}
           />
           {isLoading ? (
             <>

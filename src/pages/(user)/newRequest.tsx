@@ -1,4 +1,4 @@
-import { Card, Textarea, DatePicker, Form, DateValue } from "@heroui/react";
+import { Card, Textarea, DatePicker, Form, DateValue, addToast } from "@heroui/react";
 import { FaHandsHelping, FaCalendarAlt, FaFileAlt } from "react-icons/fa";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
@@ -56,10 +56,18 @@ const RequestHelpPage = () => {
       console.log(formattedData);
       const { data } = await axios.post("/request-help/", formattedData);
       reset();
-      toast.success(data.message);
+      // toast.success(data.message);
+      addToast({
+        description: data.message,
+        color: "success",
+      });
     } catch (err: AxiosError | any) {
-      console.log(err);
-      toast.error(err.response.data.mesage || err.message);
+      console.log(error);
+      // toast.error(err.response.data.mesage || err.message);
+      addToast({
+        description: error.response.data.message || error.message,
+        color: "danger",
+      });
     } finally {
       setIsLoading(false);
     }

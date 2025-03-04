@@ -8,6 +8,7 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  addToast,
 } from "@heroui/react";
 import {
   FaSignOutAlt,
@@ -103,11 +104,22 @@ export default function AuthProvider({
     try {
       const response = await axios.post("/");
       console.log(response.data);
-      toast.success("Sign out successful");
+      // toast.success("Sign out successful");
+       addToast({
+         title: "Logout Status",
+         description: "Sign out successful",
+         color: "success",
+       });
+      
       dispatch({ type: "SIGN_OUT" });
     } catch (err: AxiosError | any) {
       console.log(err.response?.data);
-      toast.error(err.response?.data.message);
+      // toast.error(err.response?.data.message);
+      addToast({
+        title: "Logout Status",
+        description: err.response?.data.message || err.message,
+        color: "danger",
+      });
     }
   };
 

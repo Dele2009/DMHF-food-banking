@@ -37,7 +37,7 @@ const ProfileToggle = ({
             <Avatar
               isBordered
               as="div"
-              className={`size-36 transition-transform font-bold block ${avatarClassName}`}
+              className={`transition-transform font-bold block ${avatarClassName}`}
               color="primary"
               // name={`${firstname[0].toUpperCase()} ${lastname[0].toUpperCase()}`}
               size="md"
