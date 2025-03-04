@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { usePayment, usePaystackPayment } from "../../hooks/usePayStack";
 import { PaymentDetailsType } from "../../context/PaymentContext";
 import { PageMeta } from "../../utils/app/pageMetaValues";
+import { motion } from "framer-motion"
 
 // https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-9924.jpg
 // https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg
@@ -26,23 +27,36 @@ const HomePage = () => {
       </PageMeta>
 
       <div className="min-h-screen transition-all duration-500">
-        <BgImage src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg">
+        <BgImage className="h-screen grid place-items-center w-[1500px] " src="/home.jpg">
           {/* Hero Section */}
-          <section className="py-16 text-center">
-            <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-900 dark:text-gray-100">
+          <section className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: "-50%" }}
+              whileInView={{opacity: 1, y: 0}}
+              transition={{duration: 1}}
+              className="text-6xl font-extrabold mb-12 tracking-tight text-gray-900 dark:text-gray-100"
+            >
               <FaHandsHelping className="inline text-yellow-600 mr-2" /> Welcome
               to Divine Mandate Humanitarian Foundation (DMHF)
-            </h1>
-            <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+            </motion.h1>
+            <p className="text-2xl mb-6 text-gray-700 dark:text-gray-300">
               Empowering Sustainable Livelihoods in Nigeria
             </p>
             <Button
               onPress={openPaymentModal}
               startContent={<FaDonate className="" />}
+              className="scale-105"
             >
               Donate Now
             </Button>
           </section>
+
+        </BgImage>
+
+        {/* Call to Action */}
+        <section id="call-to-action" className="py-16 bg-background">
+
+
           {/* Why Food Banking */}
           <section
             id="why-food-banking"
@@ -63,10 +77,7 @@ const HomePage = () => {
               </Card>
             </div>
           </section>
-        </BgImage>
 
-        {/* Call to Action */}
-        <section id="call-to-action" className="py-16 bg-background">
           <div className="max-w-4xl mx-auto text-center">
             <Card>
               <h3 className="text-2xl font-semibold mb-4 text-center">

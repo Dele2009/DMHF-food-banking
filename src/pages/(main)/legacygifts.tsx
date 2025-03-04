@@ -74,9 +74,9 @@ const PlanLegacyGiftsPage = () => {
         />
         <title>DMHF | Plan Your Legacy Gifts</title>
       </PageMeta>
-      <div className="min-h-screen text-gray-800">
-        <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
-          <section className="py-16 text-center">
+      <div className="min-h-screen  text-gray-800">
+        <BgImage className="h-full lg:h-[600px] grid place-items-center" src="/legacy-gift.jpg">
+          <section className="text-center">
             <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
               <FaGifts className="inline text-yellow-600 mr-2" /> Plan Your
               Legacy Gifts

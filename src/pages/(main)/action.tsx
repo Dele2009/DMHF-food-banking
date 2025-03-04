@@ -25,7 +25,7 @@ const ActionsPage = () => {
       </PageMeta>
       <div className=" text-gray-800">
         {/* Header Section */}
-        <BgImage src="https://img.freepik.com/free-photo/team-volunteers-stacking-hands_53876-30767.jpg">
+        <BgImage src="/Take-Action.jpg">
           <section className="py-16 text-center">
             <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
               Take Action

@@ -82,7 +82,7 @@ const ContactForm = () => {
       </PageMeta>
       <div className="min-h-screen">
         <div className="min-w-full max-h-80">
-          <BgImage src="https://img.freepik.com/free-photo/medium-shot-people-high-fiving_23-2148868427.jpg">
+          <BgImage className="h-[350px]" src="/contact.jpg">
             <section className="py-28 text-center ">
               <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
                 <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT
@@ -140,7 +140,7 @@ const ContactForm = () => {
           </div>
 
           {/* fORM  */}
-          <section className=" flex mt-4 mb-2">
+          <section className=" flex mt-4 mb-4">
             <div className="px-5 p-5 rounded-2xl w-full m-auto">
               <h1 className="text-2xl font-semibold text-center text-white mb-3 ">
                 Send Message
