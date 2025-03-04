@@ -14,10 +14,10 @@ const ProtectedRoute = ({ children, type = null }: ProtectedRouteProps) => {
 
   if(type){
     if(type === "user" && user?.is_admin){
-      return <Navigate to="/admin-panel" />
+      return <Navigate to="/admin-panel/dashboard" />
     }
     if(type === "admin" && !user?.is_admin){
-      return <Navigate to="/auth/sign-in" />
+      return <Navigate to="/member/dashboard" />
     }
   }
 
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children, type = null }: ProtectedRouteProps) => {
   return isAuthenticated ? (
     children
   ) : (
-    <Navigate to={user?.is_admin ? "/admin-panel" : "/auth/sign-in"} />
+    <Navigate to={user?.is_admin ? "/admin-panel/auth" : "/auth/sign-in"} />
   );
 };
 

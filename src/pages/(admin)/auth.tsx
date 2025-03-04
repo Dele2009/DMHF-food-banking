@@ -2,9 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Input, Button, Card, CardBody, CardHeader, Form } from "@heroui/react";
+import {  Button, Card, CardBody, CardHeader, Form } from "@heroui/react";
 import { useAuth } from "../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
+import Input from "../../components/ui/Input";
 
 const schema = yup.object().shape({
   email: yup
@@ -40,7 +41,7 @@ const AdminAuth = () => {
   if (isAuthenticated) return <Navigate to="/admin-panel/dashboard" />;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen">
       <div className="w-full max-w-md shadow-lg">
         <h1 className="text-center text-lg font-bold">Admin Login</h1>
         <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -74,7 +75,7 @@ const AdminAuth = () => {
             errorMessage={errors.otp?.message}
           />
 
-          <Button type="submit" color="primary" className="w-full">
+          <Button type="submit" color="warning" fullWidth>
             Login
           </Button>
         </Form>

@@ -25,3 +25,51 @@
 .dashboard-table-body > tr > td[data-selected="true"]:last-child {
   @apply rounded-e-xl;
 } */
+
+/* styling for all scroll track on the site */
+/* styling for all scroll track on the site */
+::-webkit-scrollbar {
+  width: 10px;
+  /* height: 10px; */
+}
+
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  border-radius: 10px;
+  @apply bg-warning-50;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background: #888; */
+  border-radius: 10px;
+  @apply bg-warning-200;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-warning;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #dd9520 #ffffff00;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  /* height: 10px; */
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  @apply bg-warning-50;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  @apply bg-warning-200;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  @apply bg-warning;
+}

@@ -1,3 +1,6 @@
+import ProtectedRoute from "./Protected";
+import { Spinner } from "@heroui/react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 // Main Pages
@@ -17,21 +20,22 @@ import Dashboard from "./pages/(user)/dashboard";
 import RequestHelpPage from "./pages/(user)/newRequest";
 import ViewRequestsPage from "./pages/(user)/allRequests";
 import ProfilePage from "./pages/(user)/profile";
+import Contact_Help_RequestPage from "./pages/(user)/contact_help&feedback";
+import UserMessages from "./pages/(user)/messages";
+
+// Admin Pages
+import PendingRequestsPage from "./pages/(admin)/pendingRequests";
+import AllRequestsPage from "./pages/(admin)/allRequests";
+import AdminDashboard from "./pages/(admin)/dashboard";
+import AdminAuth from "./pages/(admin)/auth";
 
 // Layouts
 import MainLayout from "./layouts/(main)";
 import AuthLayout from "./layouts/(main)/authlayout";
 import MemberLayout from "./layouts/(user/admin)/MemberLayout";
-
-import ProtectedRoute from "./Protected";
-import { Spinner } from "@heroui/react";
-import { useEffect, useState } from "react";
-
 import AdminLayout from "./layouts/(user/admin)/AdminLayout";
-import PendingRequestsPage from "./pages/(admin)/pendingRequests";
-import AllRequestsPage from "./pages/(admin)/allRequests";
-import AdminDashboard from "./pages/(admin)/dashboard";
-import AdminAuth from "./pages/(admin)/auth";
+
+
 
 export const Router = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -80,19 +84,21 @@ export const Router = () => {
       >
         <Route index element={<Navigate to="/member/dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="requests/new" element={<RequestHelpPage />} />
-        <Route path="requests/all" element={<ViewRequestsPage />} />
-        <Route path="settings/profile" element={<ProfilePage />} />
+        <Route path="new-requests" element={<RequestHelpPage />} />
+        <Route path="all-requests" element={<ViewRequestsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="help" element={<Contact_Help_RequestPage />} />
+        <Route path="messages" element={<UserMessages />} />
       </Route>
 
       <Route path="/admin-panel" element={<Outlet />}>
-        <Route index element={<AdminAuth />} />
+        <Route path="auth" element={<AdminAuth />} />
 
         <Route
           path=""
           element={
             <ProtectedRoute type="admin">
-            <AdminLayout />
+             <AdminLayout />
             </ProtectedRoute>
           }
         >

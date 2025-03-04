@@ -61,7 +61,7 @@ const RequestHelpPage = () => {
         description: data.message,
         color: "success",
       });
-    } catch (err: AxiosError | any) {
+    } catch (error: AxiosError | any) {
       console.log(error);
       // toast.error(err.response.data.mesage || err.message);
       addToast({

@@ -8,7 +8,7 @@ import axios, { AxiosError } from "axios";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Carousel from "../../components/ui/Carousel";
 import { useAuth } from "../../hooks/useAuth";
@@ -27,7 +27,7 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 export default function SignInPage() {
-  const { dispatch } = useAuth();
+  const { dispatch, isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [btnDisabled, setDisabled] = useState(true);
@@ -65,7 +65,7 @@ export default function SignInPage() {
       const { data } = await signIn(formData);
       const { access, refresh, ...userDetails } = data;
       const profile_pic = userDetails.profile_pic
-        ? `${import.meta.env.VITE_UPLOADS_API_URL}/${userDetails.profile_pic}`
+        ? `${import.meta.env.VITE_API_URL}${userDetails.profile_pic}`
         : userDetails.profile_pic;
       const user = {
         ...userDetails,
@@ -93,6 +93,14 @@ export default function SignInPage() {
       setLoading(false);
     }
   };
+
+  if(isAuthenticated) return (
+    <Navigate
+      to={`${
+        user?.is_admin ? "/admin-panel" : "/member"
+      }/dashboard`}
+    />
+  );
 
   return (
     <>

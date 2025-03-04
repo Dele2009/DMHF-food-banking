@@ -17,6 +17,7 @@ import DashboardSidebar, {
 } from "../../../components/navigation/(user)/DashboardSidebar";
 import DashboardHeader from "../../../components/navigation/(user)/DashboardHeader";
 import { UseBreakpoint } from "../../../hooks/useBreakpoint";
+import { FaComments, FaFile, FaHandshake, FaHandshakeAltSlash, FaHandshakeSlash, FaHome, FaRegFileExcel, FaStar, FaUser } from "react-icons/fa";
 
 export default function MemberLayout() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -39,40 +40,35 @@ export default function MemberLayout() {
   const SidebarLinks: LinkType[] = [
     {
       name: "Dashboard",
-      icon: FiHome,
+      icon: FaHome,
       path: "dashboard",
     },
+
     {
-      name: "Requests",
-      icon: FiBookOpen,
-      dropdown: [
-        {
-          name: "New Request",
-          icon: BsCheckCircle,
-          path: "requests/new",
-        },
-        {
-          name: "All Requests",
-          icon: BsHourglass,
-          path: "requests/all",
-        },
-      ],
+      name: "New-Request",
+      // icon: FaHandshakeAltSlash,
+      icon: FaHandshake,
+      path: "new-requests",
     },
     {
-      name: "Settings",
-      icon: FiSettings,
-      dropdown: [
-        // {
-        //   name: "Account Settings",
-        //   icon: FiStar,
-        //   path: "",
-        // },
-        {
-          name: "Profile",
-          icon: FiUser,
-          path: "settings/profile",
-        },
-      ],
+      name: "All-Requests",
+      icon: FaFile,
+      path: "all-requests",
+    },
+    {
+      name: "Profile",
+      icon: FaUser,
+      path: "profile",
+    },
+    {
+      name: "Help & Assistance",
+      icon: FaStar,
+      path: "help",
+    },
+    {
+      name: "Messages",
+      icon: FaComments,
+      path: "messages",
     },
   ];
 

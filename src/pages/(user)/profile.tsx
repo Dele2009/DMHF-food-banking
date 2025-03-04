@@ -160,7 +160,7 @@ export default function ProfilePage() {
         const { profile_pic, nin_number, ...otherDetails } = data;
         setAvatar(
           profile_pic
-          ? `${import.meta.env.VITE_UPLOADS_API_URL}/${profile_pic}`
+          ? `${import.meta.env.VITE_API_URL}${profile_pic}`
           : ""
         );
         Object.entries(otherDetails).forEach(([key, value]) => {
@@ -236,7 +236,7 @@ export default function ProfilePage() {
       });
       const { profile_pic, nin_number, ...otherDetails } = data;
       const profileUrl = profile_pic
-        ? `${import.meta.env.VITE_UPLOADS_API_URL}/${profile_pic}`
+        ? `${import.meta.env.VITE_API_URL}${profile_pic}`
         : profile_pic;
       setAvatar(profileUrl);
       console.log(profileUrl);
