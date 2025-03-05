@@ -15,6 +15,7 @@ import { axios } from "../../config/axios";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { PageMeta } from "../../utils/app/pageMetaValues";
+import { IntersectionObserverWrapper } from "../../components/ui/IntersectionWrapper";
 
 const schema = yup.object().shape({
   first_name: yup
@@ -83,19 +84,21 @@ const ContactForm = () => {
       <div className="min-h-screen">
         <div className="min-w-full max-h-80">
           <BgImage className="h-[350px]" src="/contact.jpg">
-            <section className="py-28 text-center ">
-              <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
-                <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT
-                US
-              </h1>
-              <p className="text-lg mb-6 text-gray-300">
-                Contact us through the form below
-              </p>
-            </section>
+            <IntersectionObserverWrapper>
+              <section className="py-28 text-center ">
+                <h1 className="text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
+                  <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT
+                  US
+                </h1>
+                <p className="text-xl mb-6 text-gray-300">
+                  Contact us for inquiries, donations, and partnerships.
+                </p>
+              </section>
+            </IntersectionObserverWrapper>
           </BgImage>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 p-9 m-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 p-9 lg:px-28 m-auto">
           {/* ADDRESS */}
           <div
             className="flex flex-col md:flex-row items-center md:items-start gap-10 px-5 py-5 mt-14

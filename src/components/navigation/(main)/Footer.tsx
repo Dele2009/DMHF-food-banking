@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { Logo } from "./Navbar";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-700 text-white py-8">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+    <footer className="border-t border-white/30 text-white py-8">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
         {/* About Section */}
-        <div>
-          <h2 className="text-xl font-semibold mb-4">About Us</h2>
+        <div className="space-y-5">
+          <Link to="/" className="block">
+            <Logo size={40}/>
+          </Link>
           <p className="text-sm text-gray-300">
             Divine Mandate Humanitarian Foundation (DMHF) is dedicated to
             eradicating poverty, providing food security, and supporting

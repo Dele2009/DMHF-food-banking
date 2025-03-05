@@ -18,33 +18,33 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+export const focusAreas = [
+  {
+    icon: FaHandHoldingHeart,
+    title: "Food Banking",
+    description:
+      "We establish and manage food banks across Nigeria, providing emergency food assistance to vulnerable individuals and families.",
+  },
+  {
+    icon: FaSeedling,
+    title: "Agricultural Development",
+    description:
+      "We support smallholder farmers through training, capacity building, and access to finance, markets, and technology.",
+  },
+  {
+    icon: FaSchool,
+    title: "Education",
+    description:
+      "We provide educational support to vulnerable children and youth, empowering them with skills and knowledge to break the cycle of poverty.",
+  },
+  {
+    icon: FaSeedling,
+    title: "Agribusiness Value Chain Development",
+    description:
+      "We strengthen the agribusiness value chain by promoting production, processing, marketing, and distribution.",
+  },
+];
 const AboutUsPage = () => {
-  const focusAreas = [
-    {
-      icon: FaHandHoldingHeart,
-      title: "Food Banking",
-      description:
-        "We establish and manage food banks across Nigeria, providing emergency food assistance to vulnerable individuals and families.",
-    },
-    {
-      icon: FaSeedling,
-      title: "Agricultural Development",
-      description:
-        "We support smallholder farmers through training, capacity building, and access to finance, markets, and technology.",
-    },
-    {
-      icon: FaSchool,
-      title: "Education",
-      description:
-        "We provide educational support to vulnerable children and youth, empowering them with skills and knowledge to break the cycle of poverty.",
-    },
-    {
-      icon: FaSeedling,
-      title: "Agribusiness Value Chain Development",
-      description:
-        "We strengthen the agribusiness value chain by promoting production, processing, marketing, and distribution.",
-    },
-  ];
   return (
     <>
       <PageMeta>
@@ -197,14 +197,6 @@ const AboutUsPage = () => {
             <Button>Get Involved Now</Button>
           </motion.div>
         </section>
-
-        {/* Footer */}
-        <footer className="py-8 bg-yellow-700 text-white text-center">
-          <p className="text-lg">
-            &copy; 2025 Divine Mandate Humanitarian Foundation. All rights
-            reserved.
-          </p>
-        </footer>
       </div>
     </>
   );

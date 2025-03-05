@@ -10,6 +10,7 @@ import {
   Link as NavLink,
   Button,
   Image,
+  Divider,
 } from "@heroui/react";
 import ThemeToggler from "../../theme/toggler";
 import { Link, useLocation } from "react-router-dom";
@@ -17,11 +18,11 @@ import ProfileToggle from "../../ui/ProfileToggle";
 import { useAuth } from "../../../hooks/useAuth";
 
 export const Logo = ({ size = 30 }: { size?: number }) => {
-  return <Image src="/vite.svg" alt="logo" radius="none" height={size} />;
+  return <Image src="/logo-black.png" alt="logo" radius="none" height={size} />;
 };
 
 export default function Navbar() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated} = useAuth();
   const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState("/");
@@ -41,39 +42,42 @@ export default function Navbar() {
   return (
     <Nav
       isBordered
-      classNames={{ wrapper: "!w-full !max-w-full lg:px-20" }}
+      classNames={{ wrapper: "!w-full !max-w-full lg:px-10" }}
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent justify="start">
-        
         <NavbarBrand as={Link} to="/">
-          <Logo size={20} />
-          <p className="font-bold text-inherit">ACME</p>
+          <Logo size={40} />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden lg:flex gap-4" justify="center">
+      <NavbarContent justify="end">
         {menuItems.map((item, index) => (
-          <NavbarItem key={index} isActive={item.path === currentPath}>
+          <NavbarItem
+            key={index}
+            className="hidden lg:flex gap-4"
+            isActive={item.path === currentPath}
+          >
             <NavLink
               as={Link}
               aria-current="page"
               to={item.path}
-              color={item.path !== currentPath ? "foreground" : undefined}
+              color={item.path !== currentPath ? "foreground" : "warning"}
             >
               {item.label}
             </NavLink>
           </NavbarItem>
         ))}
-      </NavbarContent>
-      <NavbarContent justify="end">
+        <NavbarItem className="hidden lg:flex">
+          <div className="w-0 h-[40px] border-r border-white/30 mx-5" />
+        </NavbarItem>
         {!isAuthenticated ? (
           <>
             <NavbarItem className="hidden lg:flex">
               <Button
                 as={Link}
-                color="primary"
+                color="warning"
                 to="/auth/sign-in"
                 variant="bordered"
               >
@@ -83,7 +87,7 @@ export default function Navbar() {
             <NavbarItem className="hidden lg:flex">
               <Button
                 as={Link}
-                color="primary"
+                color="warning"
                 to="/auth/sign-up"
                 variant="flat"
               >
@@ -93,7 +97,7 @@ export default function Navbar() {
           </>
         ) : (
           <NavbarItem className="flex">
-            <ProfileToggle/>
+            <ProfileToggle />
           </NavbarItem>
         )}
         <NavbarMenuToggle
@@ -117,27 +121,32 @@ export default function Navbar() {
           </NavbarItem>
         ))}
         <NavbarMenuItem>
-          <div className="flex justify-center">
-            <Button
-              className="w-full"
-              as={Link}
-              color="primary"
-              to="/auth/sign-in"
-              onPress={() => setIsMenuOpen(false)}
-              variant="bordered"
-            >
-              Sign In
-            </Button>
-            <Button
-              className="w-full"
-              as={Link}
-              color="warning"
-              to="/auth/sign-up"
-              onPress={() => setIsMenuOpen(false)}
-              variant="flat"
-            >
-              Sign Up
-            </Button>
+          <div className="flex gap-5 mt-5 justify-center">
+            {!isAuthenticated && (
+              <>
+                {" "}
+                <Button
+                  className="w-full"
+                  as={Link}
+                  color="warning"
+                  to="/auth/sign-in"
+                  onPress={() => setIsMenuOpen(false)}
+                  variant="bordered"
+                >
+                  Sign In
+                </Button>
+                <Button
+                  className="w-full"
+                  as={Link}
+                  color="warning"
+                  to="/auth/sign-up"
+                  onPress={() => setIsMenuOpen(false)}
+                  variant="flat"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </div>
         </NavbarMenuItem>
       </NavbarMenu>

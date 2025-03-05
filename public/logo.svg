@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="4.53682in" height="3.45702in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4537 3457"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="780" font-variant="normal" style="fill-rule:nonzero" font-weight="700">
+	<font-face 
+		font-family="Gill Sans MT">
+		<font-face-src>
+			<font-face-name name="Gill Sans MT Bold"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="D" horiz-adv-x="801" d="M75.0058 682.005l300.831 0c116.325,0 208.161,-31.8393 275.829,-95.505 67.5013,-63.499 101.329,-145.83 101.329,-246.671 0,-105.832 -34.3279,-188.829 -102.83,-249.327 -68.5019,-60.3305 -166.329,-90.5021 -293.327,-90.5021l-281.833 0 0 682.005zm169.998 -125.01l0 -431.998 110.835 0c71.9912,0 126.998,19.8322 164.995,59.3427 38.1635,39.4977 57.1619,91.6566 57.1619,156.49 0,67.0011 -19.3319,119.84 -57.829,158.337 -38.6638,38.4971 -94.0042,57.829 -166.329,57.829l-108.833 0z"/>
+   <glyph unicode="U" horiz-adv-x="823" d="M581.997 682.005l169.998 0 0 -387.844c0,-99.6613 -29.4918,-175.321 -88.3341,-226.826 -58.9963,-51.5047 -142.995,-77.3405 -252.328,-77.3405 -108.166,0 -191.998,26.1693 -251.661,78.3411 -59.843,52.159 -89.6683,126.998 -89.6683,224.838l0 388.832 169.998 0 0 -392.501c0,-47.6691 15.4963,-85.8327 46.6685,-114.503 31.1594,-28.6708 71.8372,-42.9997 122.329,-42.9997 52.5053,0 94.5045,14.6625 125.831,44.0003 31.5058,29.3378 47.1688,71.0034 47.1688,125.164l0 380.84z"/>
+   <glyph unicode="A" horiz-adv-x="780" d="M474.998 682.005l301.999 -682.005 -182.659 0 -56.1742 135.003 -304.333 0 -50.8248 -135.003 -180.004 0 273.995 682.005 198.001 0zm13.6747 -428.009l-110.168 265.002 -99.8409 -265.002 210.008 0z"/>
+   <glyph unicode="O" horiz-adv-x="875" d="M438.002 691.998c116.171,0 210.162,-35.1618 282.166,-105.498 71.8372,-70.5031 107.833,-152.333 107.833,-245.671 0,-94.8252 -36.4959,-177.002 -109.334,-246.492 -72.8378,-69.5025 -166.496,-104.344 -280.666,-104.344 -115.504,0 -209.508,34.6743 -282.166,103.843 -72.5043,69.3229 -108.833,151.5 -108.833,246.992 0,93.6706 35.9956,175.668 108.166,245.837 72.004,70.1696 166.329,105.331 282.833,105.331zm0 -559.997c64.4996,0 116.492,19.1651 155.835,57.6622 39.4977,38.3431 59.1631,88.8344 59.1631,151.333 0,62.8319 -19.6654,113.336 -59.1631,151.666 -39.3437,38.1764 -91.3359,57.3415 -155.835,57.3415 -64.8331,0 -117.005,-19.1651 -156.669,-57.3415 -39.4977,-38.3303 -59.3299,-88.8344 -59.3299,-151.666 0,-62.4984 19.8322,-112.99 59.3299,-151.333 39.6644,-38.4971 91.8362,-57.6622 156.669,-57.6622z"/>
+   <glyph unicode="I" horiz-adv-x="333" d="M251.995 682.005l0 -682.005 -169.998 0 0 682.005 169.998 0z"/>
+   <glyph unicode="F" horiz-adv-x="603" d="M547.002 682.005l0 -125.01 -299.997 0 0 -152 299.997 0 0 -124.997 -299.997 0 0 -279.998 -170.011 0 0 682.005 470.008 0z"/>
+   <glyph unicode="T" horiz-adv-x="719" d="M691.998 682.005l0 -125.01 -246.992 0 0 -556.995 -170.011 0 0 556.995 -246.992 0 0 125.01 663.994 0z"/>
+   <glyph unicode="N" horiz-adv-x="844" d="M767.004 682.005l0 -682.005 -142.34 0 -377.659 437.001 0 -437.001 -170.011 0 0 682.005 155.835 0 364.176 -416.836 0 416.836 169.998 0z"/>
+   <glyph unicode="S" horiz-adv-x="603" d="M538.997 639.339l0 -133.335c-90.6689,40.665 -162.827,60.9975 -216.666,60.9975 -30.6591,0 -55.1607,-5.16972 -73.1585,-15.4963 -18.1774,-10.3394 -27.1699,-24.0013 -27.1699,-40.9985 0,-13.1744 6.49101,-25.669 19.6654,-37.3425 12.9948,-11.8275 44.8341,-27.0031 95.4922,-45.668 50.5041,-18.6649 91.0024,-35.9956 121.341,-51.9922 30.3384,-16.0094 56.4949,-38.5099 78.495,-67.5013 22.0002,-29.171 33.0066,-65.8337 33.0066,-110.334 0,-63.3322 -24.0013,-113.836 -72.1708,-151.333 -48.1694,-37.4965 -111.502,-56.3409 -190.163,-56.3409 -84.8321,0 -166.996,21.8334 -246.671,65.6669l0 146.343c45.668,-30.3384 86.1662,-52.3386 121.508,-66.1672 35.1618,-13.8415 72.6582,-20.8328 112.156,-20.8328 66.8343,0 100.341,21.1663 100.341,63.3322 0,14.4957 -6.6706,28.1705 -20.1657,40.8318 -13.3412,12.8281 -45.668,28.504 -96.6724,46.8353 -50.9916,18.4981 -91.3359,35.4953 -121.161,51.1584 -30.0049,15.6759 -55.6739,38.0096 -77.5072,67.0011 -21.6666,29.0043 -32.4935,66.1672 -32.4935,111.668 0,58.6628 23.6678,105.998 70.8366,142.174 47.3228,35.9956 110.655,53.9934 189.83,53.9934 72.9918,0 150.165,-17.4975 231.329,-52.6593z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Gill Sans MT";font-variant:normal;font-weight:bold;src:url("#FontID0") format(svg)}
+    .fil4 {fill:none}
+    .fil5 {fill:black}
+    .fil3 {fill:#DC3300}
+    .fil1 {fill:#FEB100}
+    .fil2 {fill:#FEB100}
+    .fil0 {fill:white}
+    .fil6 {fill:black}
+    .fnt0 {font-weight:bold;font-size:306.906px;font-family:'Gill Sans MT'}
+   ]]>
+  </style>
+     <clipPath id="id0">
+      <path d="M0 0l4537 0 0 3457 -4537 0 0 -3457z"/>
+     </clipPath>
+     <clipPath id="id1">
+      <path d="M3482 874l0 480 -507 0 0 237 507 0 0 499 281 0 0 -1216 -281 0z"/>
+     </clipPath>
+       <mask id="id2">
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" x1="3728.28" y1="1559.98" x2="3728.28" y2="2032.17">
+   <stop offset="0" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+        <rect style="fill:url(#id3)" x="3485" y="1360" width="278" height="729"/>
+       </mask>
+     <mask id="id4">
+  <linearGradient id="id5" gradientUnits="userSpaceOnUse" x1="1786.63" y1="1760.52" x2="1714.04" y2="1946.65">
+   <stop offset="0" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+      <rect style="fill:url(#id5)" x="765" y="1679" width="1198" height="414"/>
+     </mask>
+     <mask id="id6">
+  <linearGradient id="id7" gradientUnits="userSpaceOnUse" x1="1148.84" y1="944.95" x2="1103.99" y2="1313.06">
+   <stop offset="0" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+      <rect style="fill:url(#id7)" x="767" y="874" width="624" height="523"/>
+     </mask>
+     <mask id="id8">
+  <linearGradient id="id9" gradientUnits="userSpaceOnUse" x1="2879.38" y1="1559.98" x2="2879.38" y2="2032.17">
+   <stop offset="0" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+      <rect style="fill:url(#id9)" x="2647" y="1360" width="266" height="729"/>
+     </mask>
+     <mask id="id10">
+  <linearGradient id="id11" gradientUnits="userSpaceOnUse" x1="3518.96" y1="1405.4" x2="3518.96" y2="933.207">
+   <stop offset="0" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+      <rect style="fill:url(#id11)" x="3485" y="876" width="266" height="729"/>
+     </mask>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_610398352">
+   <g>
+    <g style="clip-path:url(#id0)">
+     <image x="0" y="0" width="4537" height="3457" xlink:href="DMH_Images\DMH_ImgID1.png"/>
+    </g>
+   </g>
+   <rect class="fil0" x="163" y="171" width="4212" height="2955" rx="460" ry="424"/>
+   <g>
+    <path class="fil1" d="M767 2084l552 6c320,3 559,-154 640,-407l204 278 127 0 357 -601 2 730 264 0 -4 -1216 -231 0 -448 760c-262,-398 -372,-760 -911,-760l-552 0 0 523 281 -61 0 -231 257 0c241,0 399,144 399,377 0,233 -158,377 -399,377l-63 0c-90,106 -330,227 -475,225l0 0z"/>
+    <polygon class="fil2" points="3482,874 3482,1354 2975,1354 2975,1591 3482,1591 3482,2090 3763,2090 3763,874 "/>
+    <g style="clip-path:url(#id1)">
+     <g>
+      <path id="1" class="fil3" style="mask:url(#id2)" d="M3749 1360c-60,663 -286,290 -262,730l276 0 -14 -730z"/>
+     </g>
+    </g>
+    <polygon class="fil4" points="3482,874 3482,1354 2975,1354 2975,1591 3482,1591 3482,2090 3763,2090 3763,874 "/>
+    <path class="fil5" d="M886 2025c-9,3 -14,4 -22,6 -17,5 -32,8 -49,13l-48 7c18,-4 46,-19 64,-29l61 -36c7,-4 13,-8 20,-12l18 -12 0 0 1 -1 0 0 0 0 30 -23 -1 0c14,-11 28,-21 42,-35 73,-73 132,-156 135,-264 2,-55 -9,-113 -30,-163l-34 -73c45,32 84,105 111,152 14,24 21,50 31,75l12 39c1,7 2,13 7,17 24,-19 46,-42 66,-73 43,-65 77,-146 98,-223l5 -12c1,9 0,20 0,31 0,133 -39,259 -122,365 -47,61 -105,107 -168,149l-67 38c-50,23 -107,49 -160,64z"/>
+    <path class="fil6" d="M1221 1525c-15,-6 -25,-26 -30,-39 -22,-54 39,-109 89,-89 69,28 60,107 9,132 -26,13 -43,6 -68,-4z"/>
+    <path class="fil3" style="mask:url(#id4)" d="M1959 1683c-343,209 -335,176 -717,176 -90,105 -328,226 -474,225l551 6c320,3 559,-154 640,-407z"/>
+    <path class="fil3" style="mask:url(#id6)" d="M1391 874l-624 0 0 523 141 -27c191,-201 -201,-479 483,-496z"/>
+    <path class="fil3" style="mask:url(#id8)" d="M2911 1360c-61,663 -286,290 -262,730l264 0 -2 -730z"/>
+    <path class="fil3" style="mask:url(#id10)" d="M3487 1605c61,-662 287,-290 263,-729l-265 0 2 729z"/>
+    <text x="786" y="2333"  class="fil5 fnt0">F</text>
+    <text x="1028" y="2333"  class="fil5 fnt0">O</text>
+    <text x="1352" y="2333"  class="fil5 fnt0">U</text>
+    <text x="1661" y="2333"  class="fil5 fnt0">N</text>
+    <text x="1976" y="2333"  class="fil5 fnt0">D</text>
+    <text x="2262" y="2333"  class="fil5 fnt0">A</text>
+    <text x="2520" y="2333"  class="fil5 fnt0">T</text>
+    <text x="2797" y="2333"  class="fil5 fnt0">I</text>
+    <text x="2956" y="2333"  class="fil5 fnt0">O</text>
+    <text x="3280" y="2333"  class="fil5 fnt0">N</text>
+    <text x="3595" y="2333"  class="fil5 fnt0">S</text>
+   </g>
+  </g>
+ </g>
+</svg>

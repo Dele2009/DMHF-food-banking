@@ -12,8 +12,13 @@ import {
 } from "react-icons/fa";
 import BgImage from "../../components/ui/BgImage";
 import { PageMeta } from "../../utils/app/pageMetaValues";
+import { usePayment } from "../../hooks/usePayStack";
+import { motion } from "framer-motion";
+import { IntersectionObserverWrapper } from "../../components/ui/IntersectionWrapper";
 
 const ActionsPage = () => {
+    const { openPaymentModal } = usePayment();
+
   return (
     <>
       <PageMeta>
@@ -26,35 +31,37 @@ const ActionsPage = () => {
       <div className=" text-gray-800">
         {/* Header Section */}
         <BgImage src="/Take-Action.jpg">
-          <section className="py-16 text-center">
-            <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
-              Take Action
-            </h1>
-            <p className="text-lg mb-6 text-gray-300">
-              Empower communities by supporting our initiatives
-            </p>
-          </section>
-          {/* Sponsorship Options */}
-          <section id="sponsorship" className="py-1 pb-14 text-gray-900">
-            <div className="max-w-4xl mx-auto">
-              <Card>
-                <div className="flex flex-col justify-center items-center space-x-4 mb-6">
-                  <FaHandHoldingHeart className="text-yellow-600 text-3xl" />
-                  <h2 className="text-3xl font-semibold">
-                    Sponsor a Food Bank Project
-                  </h2>
-                </div>
-                <p className="text-lg mb-4">
-                  By sponsoring a project, you can provide a food bank for a
-                  community, school, or health clinic. 100% of your donation
-                  will directly fund food bank initiatives.
-                </p>
-                <div className="flex justify-center space-x-4">
-                  <Button>Sponsor Now</Button>
-                </div>
-              </Card>
-            </div>
-          </section>
+          <IntersectionObserverWrapper>
+            <section className="py-16 text-center">
+              <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
+                Take Action
+              </h1>
+              <p className="text-lg mb-6 text-gray-300">
+                Empower communities by supporting our initiatives
+              </p>
+            </section>
+            {/* Sponsorship Options */}
+            <section id="sponsorship" className="py-1 pb-14 text-gray-900">
+              <div className="max-w-4xl mx-auto">
+                <Card>
+                  <div className="flex flex-col justify-center items-center space-x-4 mb-6">
+                    <FaHandHoldingHeart className="text-yellow-600 text-3xl" />
+                    <h2 className="text-3xl font-semibold">
+                      Sponsor a Food Bank Project
+                    </h2>
+                  </div>
+                  <p className="text-lg mb-4">
+                    By sponsoring a project, you can provide a food bank for a
+                    community, school, or health clinic. 100% of your donation
+                    will directly fund food bank initiatives.
+                  </p>
+                  <div className="flex justify-center space-x-4">
+                    <Button onPress={openPaymentModal}>Sponsor Now</Button>
+                  </div>
+                </Card>
+              </div>
+            </section>
+          </IntersectionObserverWrapper>
         </BgImage>
 
         {/* Contribution Methods */}

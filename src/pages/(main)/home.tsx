@@ -1,4 +1,3 @@
-import Button from "../../components/ui/Button";
 import Card from "../../components/ui/Card";
 import { FaHandsHelping, FaSeedling, FaDonate } from "react-icons/fa";
 import BgImage from "../../components/ui/BgImage";
@@ -7,7 +6,12 @@ import { useEffect, useState } from "react";
 import { usePayment, usePaystackPayment } from "../../hooks/usePayStack";
 import { PaymentDetailsType } from "../../context/PaymentContext";
 import { PageMeta } from "../../utils/app/pageMetaValues";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import PulsatingElement from "../../components/ui/PulsatingShadow";
+import { Link } from "react-router-dom";
+import { Button, Divider } from "@heroui/react";
+import Carousel from "../../components/ui/Carousel";
+import { focusAreas } from "./about";
 
 // https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-9924.jpg
 // https://img.freepik.com/free-vector/line-style-volunteer-group-raising-hand-up-with-heart-vector_1017-48262.jpg
@@ -27,36 +31,57 @@ const HomePage = () => {
       </PageMeta>
 
       <div className="min-h-screen transition-all duration-500">
-        <BgImage className="h-screen grid place-items-center w-[1500px] " src="/home.jpg">
+        <BgImage className="h-screen grid place-items-center" src="/home.jpg">
           {/* Hero Section */}
-          <section className="text-center">
+          <section className="text-center ">
             <motion.h1
               initial={{ opacity: 0, y: "-50%" }}
-              whileInView={{opacity: 1, y: 0}}
-              transition={{duration: 1}}
-              className="text-6xl font-extrabold mb-12 tracking-tight text-gray-900 dark:text-gray-100"
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-6xl font-extrabold -mt-12 mb-12 tracking-tight text-gray-900 dark:text-gray-100"
             >
               <FaHandsHelping className="inline text-yellow-600 mr-2" /> Welcome
               to Divine Mandate Humanitarian Foundation (DMHF)
             </motion.h1>
-            <p className="text-2xl mb-6 text-gray-700 dark:text-gray-300">
-              Empowering Sustainable Livelihoods in Nigeria
-            </p>
-            <Button
-              onPress={openPaymentModal}
-              startContent={<FaDonate className="" />}
-              className="scale-105"
+            <Carousel
+              showIndicators={false}
+              autoPlay
+              loop
+              className="max-w-2xl m-auto  mb-8"
             >
-              Donate Now
-            </Button>
+              {focusAreas.map((area, index) => (
+                <Card key={index} className="w-[60%] h-full !p-2">
+                  <h3 className="flex flex-col justify-center items-center text-md font-semibold mb-2">
+                    <area.icon className="inline text-yellow-600" />{" "}
+                    {area.title}
+                  </h3>
+                  <Divider className="!bg-foreground/30" />
+                  <p className="text-sm mt-2">{area.description}</p>
+                </Card>
+              ))}
+            </Carousel>
+            {/* <p className="text-2xl mb-6 text-gray-700 dark:text-gray-300">
+              Empowering Sustainable Livelihoods in Nigeria
+            </p> */}
+            <PulsatingElement
+              className="mx-auto rounded-xl"
+              shadowColor="#ca8a04"
+            >
+              <Button
+                onPress={openPaymentModal}
+                color="warning"
+                size="lg"
+                startContent={<FaDonate className="" />}
+                className="scale-105"
+              >
+                Donate Now
+              </Button>
+            </PulsatingElement>
           </section>
-
         </BgImage>
 
         {/* Call to Action */}
         <section id="call-to-action" className="py-16 bg-background">
-
-
           {/* Why Food Banking */}
           <section
             id="why-food-banking"
@@ -90,31 +115,19 @@ const HomePage = () => {
                 bank initiatives.
               </p>
               <div className="flex justify-center space-x-4">
-                <Button startContent={<FaDonate className="" />}>
+                <Button
+                  as={Link}
+                  to="/about"
+                  color="warning"
+                  size="lg"
+                  startContent={<FaDonate className="" />}
+                >
                   Learn More
                 </Button>
-                <Button startContent={<FaDonate className="" />}>Now</Button>
               </div>
             </Card>
           </div>
         </section>
-
-        {/* Footer */}
-        {/* <footer className="py-8 bg-yellow-700 text-white text-center">
-          <p className="text-lg">
-            &copy; 2025 Divine Mandate Humanitarian Foundation. All rights
-            reserved.
-          </p>
-          <div className="mt-4">
-            <Button startContent={<FaHandsHelping className="" />}>
-              Privacy Policy
-            </Button>
-            <Button startContent={<FaHandsHelping className="" />}>
-              {" "}
-              Terms of Service
-            </Button>
-          </div>
-        </footer> */}
       </div>
     </>
   );

@@ -18,7 +18,7 @@ const Carousel = ({
   interval = 3000,
   showIndicators = true,
   showArrows = true,
-  loop = true,
+  loop = false,
   className,
 }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +27,13 @@ const Carousel = ({
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = (step = 1) => {
-    setCurrentIndex((prev) => (prev + step) % totalSlides);
+    setCurrentIndex((prev) => {
+      const nextIndex = prev + step;
+      if (loop && nextIndex >= totalSlides) {
+        return 0;
+      }
+      return nextIndex % totalSlides;
+    });
   };
 
   const prevSlide = (step = 1) => {
@@ -36,9 +42,9 @@ const Carousel = ({
 
   const indicatorClick = (index: number) => {
     if (currentIndex < index) {
-      nextSlide(index);
+      nextSlide(index - currentIndex);
     } else {
-      prevSlide(index);
+      prevSlide(currentIndex - index);
     }
   };
 
@@ -59,11 +65,11 @@ const Carousel = ({
 
   return (
     <div
-      className={`relative w-full  overflow-hidden ${className}`}
+      className={`relative w-full overflow-hidden ${className}`}
       ref={sliderRef}
     >
       <div
-        className="flex w-full h-full  transition-transform ease-in-out duration-500"
+        className="flex w-full h-full transition-transform ease-in-out duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {children.map((child, index) => (
@@ -101,7 +107,7 @@ const Carousel = ({
           {children.map((_, index) => (
             <span
               key={index}
-              onClick={()=> indicatorClick(index)}
+              onClick={() => indicatorClick(index)}
               className={`w-3 h-3 rounded-full cursor-pointer ${
                 currentIndex === index ? "bg-white" : "bg-gray-400"
               }`}

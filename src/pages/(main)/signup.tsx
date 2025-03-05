@@ -15,6 +15,7 @@ import {
   FaPhoneAlt,
   FaUserCircle,
   FaUserTag,
+  FaIdCard,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -58,7 +59,7 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [isVerifyNin, setIsVerifyNin] = useState(false);
-  const [ninValid, setNinValid] = useState(false);
+  const [isNinVerified, setIsNinVerified] = useState(false);
 
   const [isVisible, setIsVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
@@ -123,23 +124,22 @@ export default function SignUpPage() {
       // const { accessToken } = responseBody;
       // console.log(accessToken);
       // const errorField
-      const { c_password, password, ...otherFields } = getValues();
-      Object.entries(otherFields).forEach(([key, value]) => {
-        if (!value) {
-          setError(
-            key as keyof SignInData,
-            { message: "This field is required for verification" },
-            { shouldFocus: true }
-          );
-        } else {
-          clearErrors(key as keyof SignInData);
-        }
+      const { nin_number: nin } = getValues();
+      
+    if (!isNinVerified || !getValues("nin_number")) {
+      setError("nin_number", {
+        message: "Please verify your NIN number before submitting",
       });
-
-      if (Array.from(Object.keys(errors)).length > 0) return;
+      addToast({
+        description: "Provide your nin number and verify it, to proceed",
+        color: "warning",
+      });
+      return;
+    }
+      clearErrors("nin_number");
 
       const { data } = await axios.post("/api/auth/verify-nin", {
-        nin: otherFields.nin_number,
+        nin,
       });
       // toast.success("NIN is valid");
       addToast({
@@ -166,11 +166,9 @@ export default function SignUpPage() {
       formData.append(key, value);
     });
     try {
-      const response = await signUp(formData);
+      await signUp(formData);
       dispatch({ type: "SET_AUTH_EMAIL", payload: Formdata.email });
       reset();
-      // toast.success(response.data.message);
-
       navigate("/auth/verify");
     } catch (error: any) {
       console.error(error);
@@ -191,13 +189,16 @@ export default function SignUpPage() {
           name="description"
           content="Request help from Divine Mandate Humanitarian Foundation by filling out the form below. Our team will review your application and get back to you shortly."
         />
-        <title>Register To Request Help - Divine Mandate Humanitarian Foundation</title>
+        <title>
+          Register To Request Help - Divine Mandate Humanitarian Foundation
+        </title>
       </PageMeta>
       <div className="overflow-hidden h-screen grid grid-cols-1 lg:grid-cols-2 w-full place-items-center">
         <Carousel
           showArrows={false}
           showIndicators={false}
           autoPlay
+          loop
           className="hidden lg:block h-full"
         >
           <img
@@ -211,7 +212,8 @@ export default function SignUpPage() {
             className="w-full h-full object-cover bg-blue-400"
           />
         </Carousel>
-        <div className="w-full h-screen overflow-y-auto mx-auto flex flex-col justify-center items-center  px-10">
+        <div className="relative w-full h-screen overflow-y-auto mx-auto flex flex-col justify-center items-center  px-10">
+          <div className="mb-[250px]"/>
           <Link to="/" className="block mt-56 mb-10">
             <Logo size={45} />
           </Link>
@@ -226,7 +228,6 @@ export default function SignUpPage() {
             <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
               <Input
                 isClearable
-                isRequired
                 fullWidth
                 {...register("first_name")}
                 errorMessage={errors.first_name?.message}
@@ -239,7 +240,6 @@ export default function SignUpPage() {
               />
               <Input
                 isClearable
-                isRequired
                 fullWidth
                 {...register("last_name")}
                 errorMessage={errors.last_name?.message}
@@ -253,7 +253,6 @@ export default function SignUpPage() {
             </div>
             <Input
               isClearable
-              isRequired
               className="mb-4"
               {...register("email")}
               errorMessage={errors.email?.message}
@@ -265,7 +264,6 @@ export default function SignUpPage() {
             />
             <Input
               isClearable
-              isRequired
               className="mb-4"
               {...register("phone_number", { valueAsNumber: true })}
               errorMessage={errors.phone_number?.message}
@@ -275,14 +273,13 @@ export default function SignUpPage() {
               startContent={<FaPhoneAlt className="text-yellow-500 text-xl" />}
             />
             <Input
-              isRequired
               className="mb-4"
               {...register("nin_number")}
               errorMessage={errors.nin_number?.message}
               isInvalid={!!errors.nin_number}
               label="National ID Number (NIN)"
               labelPlacement="inside"
-              startContent={<FaUserTag className="text-yellow-500 text-xl" />}
+              startContent={<FaIdCard className="text-yellow-500 text-xl" />}
               endContent={
                 <div className="flex items-center">
                   <Button
@@ -301,7 +298,6 @@ export default function SignUpPage() {
             />
             <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
               <Input
-                isRequired
                 onInput={(e) =>
                   validatePassWord((e.target as HTMLInputElement).value)
                 }
@@ -335,7 +331,6 @@ export default function SignUpPage() {
                 }
               />
               <Input
-                isRequired
                 {...register("c_password")}
                 errorMessage={errors.c_password?.message}
                 isInvalid={!!errors.c_password}

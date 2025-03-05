@@ -1,47 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { FaGifts, FaRegFileAlt, FaHandsHelping } from "react-icons/fa";
+import {
+  FaGifts,
+  FaRegFileAlt,
+  FaHandsHelping,
+  FaBitcoin,
+  FaUniversity,
+  FaCreditCard,
+} from "react-icons/fa";
 import BgImage from "../../components/ui/BgImage";
 import { PageMeta } from "../../utils/app/pageMetaValues";
-
-const IntersectionObserverWrapper = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
-      transition={{ duration: 0.6 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
+import Card from "../../components/ui/Card";
+import { IntersectionObserverWrapper } from "../../components/ui/IntersectionWrapper";
 
 const steps = [
   {
@@ -74,27 +43,35 @@ const PlanLegacyGiftsPage = () => {
         />
         <title>DMHF | Plan Your Legacy Gifts</title>
       </PageMeta>
+
       <div className="min-h-screen  text-gray-800">
-        <BgImage className="h-full lg:h-[600px] grid place-items-center" src="/legacy-gift.jpg">
-          <section className="text-center">
-            <h1 className="text-4xl font-extrabold mb-4 tracking-tight text-gray-100">
-              <FaGifts className="inline text-yellow-600 mr-2" /> Plan Your
-              Legacy Gifts
-            </h1>
-            <p className="text-lg mb-6 text-gray-300">
-              Create a lasting impact through thoughtful and meaningful
-              contributions.
-            </p>
-          </section>
+        <BgImage
+          className="h-full lg:h-[600px] grid place-items-center"
+          src="/legacy-gift.jpg"
+        >
+          <IntersectionObserverWrapper>
+            <section className="text-center">
+              <h1 className="text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
+                <FaGifts className="inline text-yellow-600 mr-2" /> Plan Your
+                Legacy Gifts
+              </h1>
+              <p className="text-2xl mb-6 text-gray-300">
+                Create a lasting impact through thoughtful and meaningful
+                contributions.
+              </p>
+            </section>
+          </IntersectionObserverWrapper>
         </BgImage>
 
         <section id="steps" className="py-16 bg-background">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold mb-16 text-gray-900 dark:text-gray-100">
-              <FaHandsHelping className="inline text-yellow-600 mr-2" /> How to
-              Create a Legacy Gift
-            </h2>
-          </div>
+          <IntersectionObserverWrapper>
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-semibold mb-16 text-gray-900 dark:text-gray-100">
+                <FaHandsHelping className="inline text-yellow-600 mr-2" /> How
+                to Create a Legacy Gift
+              </h2>
+            </div>
+          </IntersectionObserverWrapper>
 
           <div className="max-w-4xl mx-auto border-l-2 border-yellow-400 pl-6">
             {steps.map((step, index) => (
@@ -116,6 +93,46 @@ const PlanLegacyGiftsPage = () => {
             ))}
           </div>
         </section>
+        <BgImage
+          id="contributions"
+          className="py-16"
+          src="https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-9924.jpg"
+        >
+          <div className="w-full max-w-6xl mx-auto text-center">
+            <h2 className="text-3xl font-semibold mb-6 text-foreground">
+              Ways to Contribute
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-9">
+              <Card>
+                <div className="flex items-center space-x-4 mb-4">
+                  <FaBitcoin className="text-yellow-600 text-2xl" />
+                  <h3 className="text-xl font-semibold">Crypto</h3>
+                </div>
+                <p className="text-lg">
+                  Make secure contributions using cryptocurrency.
+                </p>
+              </Card>
+              <Card>
+                <div className="flex items-center space-x-4 mb-4">
+                  <FaUniversity className="text-yellow-600 text-2xl" />
+                  <h3 className="text-xl font-semibold">Wire</h3>
+                </div>
+                <p className="text-lg">
+                  Transfer directly to our bank account for a lasting impact.
+                </p>
+              </Card>
+              <Card>
+                <div className="flex items-center space-x-4 mb-4">
+                  <FaCreditCard className="text-yellow-600 text-2xl" />
+                  <h3 className="text-xl font-semibold">Card</h3>
+                </div>
+                <p className="text-lg">
+                  Use your credit or debit card to support our mission.
+                </p>
+              </Card>
+            </div>
+          </div>
+        </BgImage>
       </div>
     </>
   );

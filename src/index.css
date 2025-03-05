@@ -73,3 +73,19 @@
 *::-webkit-scrollbar-thumb:hover {
   @apply bg-warning;
 }
+
+@keyframes pulse-shadow {
+  0% {
+    box-shadow: 0 0 20px var(--shadow-color);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--shadow-color);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--shadow-color);
+  }
+}
+
+.pulsate-shadow {
+  animation: pulse-shadow 1.5s infinite alternate;
+}

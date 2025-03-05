@@ -116,6 +116,7 @@ export default function SignInPage() {
           showArrows={false}
           showIndicators={false}
           autoPlay
+          loop
           className="hidden lg:block h-full"
         >
           <img
