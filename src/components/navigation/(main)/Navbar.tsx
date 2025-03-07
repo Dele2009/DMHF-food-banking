@@ -47,7 +47,7 @@ export default function Navbar() {
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent justify="start">
-        <NavbarBrand as={Link} to="/">
+        <NavbarBrand className="lg:pl-36" as={Link} to="/">
           <Logo size={40} />
         </NavbarBrand>
       </NavbarContent>
@@ -69,9 +69,11 @@ export default function Navbar() {
             </NavLink>
           </NavbarItem>
         ))}
-        <NavbarItem className="hidden lg:flex">
+
+        {/* Uncomment if Divider is needed */}
+        {/* <NavbarItem className="hidden lg:flex">
           <div className="w-0 h-[40px] border-r border-white/30 mx-5" />
-        </NavbarItem>
+        </NavbarItem> */}
         {!isAuthenticated ? (
           <>
             <NavbarItem className="hidden lg:flex">
@@ -89,7 +91,7 @@ export default function Navbar() {
                 as={Link}
                 color="warning"
                 to="/auth/sign-up"
-                variant="flat"
+                variant="bordered"
               >
                 Sign Up
               </Button>
@@ -141,7 +143,7 @@ export default function Navbar() {
                   color="warning"
                   to="/auth/sign-up"
                   onPress={() => setIsMenuOpen(false)}
-                  variant="flat"
+                  variant="bordered"
                 >
                   Sign Up
                 </Button>

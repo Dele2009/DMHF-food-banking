@@ -51,11 +51,11 @@ const PlanLegacyGiftsPage = () => {
         >
           <IntersectionObserverWrapper>
             <section className="text-center">
-              <h1 className="text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
+              <h1 className="text-2xl lg:text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
                 <FaGifts className="inline text-yellow-600 mr-2" /> Plan Your
                 Legacy Gifts
               </h1>
-              <p className="text-2xl mb-6 text-gray-300">
+              <p className="text-lg lg:text-2xl mb-6 text-gray-300">
                 Create a lasting impact through thoughtful and meaningful
                 contributions.
               </p>

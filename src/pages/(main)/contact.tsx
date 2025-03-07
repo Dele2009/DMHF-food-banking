@@ -86,11 +86,11 @@ const ContactForm = () => {
           <BgImage className="h-[350px]" src="/contact.jpg">
             <IntersectionObserverWrapper>
               <section className="py-28 text-center ">
-                <h1 className="text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
+                <h1 className="text-2xl lg:text-6xl font-extrabold mb-4 tracking-tight text-gray-100">
                   <FaPhoneAlt className="inline text-yellow-600 mr-2" /> CONTACT
                   US
                 </h1>
-                <p className="text-xl mb-6 text-gray-300">
+                <p className="text-lg lg:text-xl mb-6 text-gray-300">
                   Contact us for inquiries, donations, and partnerships.
                 </p>
               </section>

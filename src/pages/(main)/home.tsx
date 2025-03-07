@@ -38,19 +38,20 @@ const HomePage = () => {
               initial={{ opacity: 0, y: "-50%" }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="text-6xl font-extrabold -mt-12 mb-12 tracking-tight text-gray-900 dark:text-gray-100"
+              className="text-2xl lg:text-6xl font-extrabold -mt-12 mb-12 tracking-tight text-gray-900 dark:text-gray-100"
             >
               <FaHandsHelping className="inline text-yellow-600 mr-2" /> Welcome
               to Divine Mandate Humanitarian Foundation (DMHF)
             </motion.h1>
             <Carousel
               showIndicators={false}
+              showArrows={false}
               autoPlay
               loop
-              className="max-w-2xl m-auto  mb-8"
+              className="max-w-2xl m-auto hidden lg:block  mb-8"
             >
               {focusAreas.map((area, index) => (
-                <Card key={index} className="w-[60%] h-full !p-2">
+                <Card key={index} className="w-full lg:w-[60%] h-full !p-2">
                   <h3 className="flex flex-col justify-center items-center text-md font-semibold mb-2">
                     <area.icon className="inline text-yellow-600" />{" "}
                     {area.title}
